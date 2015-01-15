@@ -1,0 +1,25 @@
+UserManageService : 研究室メンバー管理サービス
+-models
+-- user.js
+--- モデルの定義
+-- users.js
+-node_modules
+-public
+-routes
+--index.js
+-views
+-- create-user.ejs
+-- index.ejs
+-app.js
+-config.json
+-memo.txt
+-package.json 
+
+
+
+API
+getUserList
+getUserById
+create
+delete
+update

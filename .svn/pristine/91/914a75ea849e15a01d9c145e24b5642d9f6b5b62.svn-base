@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+</head>
+
+<hader>
+    <nav>
+        <ul class="nav nav-tabs">
+            <li><a href="/">Home</a></li>
+            <li><a href="/users">Users</a></li>
+            <li class="active"><a href="/create">Create </a></li>
+        </ul>
+    </nav>
+</hader>
+
+<body>
+    <h1><%= title %></h1>
+    <p>
+        Welcome to
+        <%= title %></p>
+    <form method="POST" action="/create">
+        <div class="form-group">
+            <label>ID</label>
+            <input class="form-control" type="text" name="id" placeholder="tori" required></div>
+        <div class="form-group">
+            <label>学籍番号</label>
+            <input class="form-control" type="text" name="stu_id", placeholder="148X222X"></div>
+        <div class="form-group">
+            <label>名</label>
+            <input class="form-control" type="text" name="first_name", placeholder="鷹取" required></div>
+        <div class="form-group">
+            <label>姓</label>
+            <input class="form-control" type="text" name="last_name", placeholder="敏志" required></div>
+        <div class="form-group">
+            <label>愛称・ニックネーム</label>
+            <input class="form-control" type="text" name="screen_name", placeholder="tori" required></div>
+        <div class="radio">
+            <input type="radio" name="sex", value="male", checked="checked">男性</div>
+        <div class="radio">
+            <input type="radio" name="sex", value="female">女性</div>
+        <div class="form-group">
+            <label>誕生日</label>
+            <input class="form-control" type="date" name="birthday"></div>
+        <div class="form-group">
+            <label>学年</label>
+            <select name="group">
+                <option value="">-- 種別 --</option>
+                <option value="B4">B4</option>
+                <option value="M1">M1</option>
+                <option value="M2">M2</option>
+                <option value="D1">D1</option>
+                <option value="D2">D2</option>
+                <option value="D3">D3</option>
+                <option value="ResearchStudent">研究生</option>
+                <option value="Staff">Staff</option>
+                <option value="2015Graduates">2015年度卒業生</option>
+                <option value="2014Graduates">2014年度卒業生</option>
+                <option value="2013Graduates">2013年度卒業生</option>
+                <option value="2012Graduates">2012年度卒業生</option>
+                <option value="2011Graduates">2011年度卒業生</option>
+                <option value="2010Graduates">2010年度卒業生</option>
+                <option value="2009Graduates">2009年度卒業生</option>
+                <option value="2008Graduates">2008年度卒業生</option>
+                <option value="Guest">ゲスト</option>
+                <option value="Other">その他</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>電話番号</label>
+            <input class="form-control" type="text" name="tel" placeholder="xxx-yyyy-zzzz"></div>
+        <div class="form-group">
+            <label>実家電話番号</label>
+            <input class="form-control" type="text" name="home_tel" placeholder="xxx-yyy-zzzz"></div>
+        <div class="form-group">
+            <label>メールアドレス</label>
+            <input class="form-control" type="email" name="mail"></div>
+        <div class="form-group">
+            <label>携帯メールアドレス</label>
+            <input class="form-control" type="email" name="mob_mail"></div>
+        <div class="form-group">
+            <label>現住所</label>
+            <input class="form-control" type="text" name="addr"></div>
+        <div class="form-group">
+            <label>実家住所</label>
+            <input class="form-control" type="text" name="home_addr"></div>
+        <div class="form-group">
+            <label>登録</label>
+            <input class="form-control" type="submit" ></div>
+    </form>
+</body>
+</html>

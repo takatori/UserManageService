@@ -8,21 +8,20 @@ var crypto = require('crypto');
  * User Schema
 */
 var UserSchema = new Schema({
-    _id :        { type: String, default: '', required: true},    // id 登録ID
+    _id :       { type: String, default: '', required: true},    // id 登録ID
     stu_id :    { type: String, default: ''},                   // stu_id 学籍番号
-    first_name: { type: String, default: '', equired: true },   // 名
+    first_name: { type: String, default: '', required: true },   // 名
     last_name:  { type: String, default: '', required: true },   // 姓
     screen_name:{ type: String, default: '', required: true},    // 愛称・ニックネーム
     sex:        { type: String}, // 性別 [male, female]
-    birthday:   { type: Date, }, // 生年月日
+    birthday:   { type: Date}, // 生年月日
     group:      { type: String}, // 学年 [B3, B4, M1, M2, Stuff, 20xxGraduates, ...]
     tel:        { type: String}, // 電話番号
     home_tel:   { type: String}, // 実家電話番号
     mail:       { type: String}, // メールアドレス
-    mob_mail:   { type: String}, // 携帯メールアドレス
     addr:       { type: String}, // 現住所
     home_addr:  { type: String}, // 実家住所
-    img_url:    { type: String}  // アイコンのアドレス
+    img:    { type: String}  // アイコンのアドレス
 });
 
 

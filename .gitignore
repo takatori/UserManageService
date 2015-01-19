@@ -1,0 +1,2 @@
+# nodeモジュールは除外
+node_modules/

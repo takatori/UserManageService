@@ -1,12 +1,24 @@
 {
-  "name": "application-name",
+  "name": "testApp",
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node app.js"
+    "start": "node app",
+    "test": "node_modules/.bin/mocha --reporter spec"
   },
   "dependencies": {
-    "express": "3.4.6",
-    "ejs": "*"
+    "body-parser": "~1.10.1",
+    "cookie-parser": "~1.3.3",
+    "debug": "~2.1.1",
+    "express": "~4.11.0",
+    "morgan": "~1.5.1",
+    "serve-favicon": "~2.2.0",
+    "stylus": "0.42.3",
+    "socket.io": "~1.2.1",
+    "mongoose": "~3.8.21",
+    "mongoose-unique-validator": "~0.4.1",
+    "ect": "~0.5.9",
+    "mocha": "~2.1.0",
+    "should": "~4.6.1"
   }
 }

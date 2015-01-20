@@ -6,9 +6,7 @@ UserManageService
 ## Description
 
 
-
 ## Demo
-
 
 
 ## Requirement
@@ -17,9 +15,7 @@ UserManageService
 * mongodb 
 
 ## Usage
-* /register
-  * ユーザ情報登録
-* /users
-  * ユーザ一覧表示
-* /user/{id}
-  * idと一致するユーザ情報表示
+* API Document
+  * [apiary.io](http://docs.usermanageservice.apiary.io)
+
+

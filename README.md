@@ -5,16 +5,20 @@ UserManageService
 ## Description
 
 
+
 ## Demo
 
+
+
 ## Requirement
+* Node.js 
+* express 
+* mongodb 
 
 ## Usage
-
-## Install
-
-## LICENCE
-
-## Author
-
-
+* /register
+  * ユーザ情報登録
+* /users
+  * ユーザ一覧表示
+* /user/{id}
+  * idと一致するユーザ情報表示

@@ -8,6 +8,7 @@ var mongoose = require('mongoose');
 // this is helpful when you would like to change behavior when testing
 process.env.NODE_ENV = 'test';
 
+// 各テストごとの始まる前の処理
 beforeEach(function (done) {
 
     function clearDB() {
@@ -33,6 +34,8 @@ beforeEach(function (done) {
     }
 });
 
+
+// 各テストごとの終わった後の処理
 afterEach(function (done) {
     mongoose.models = {};
     mongoose.modelSchemas = {};

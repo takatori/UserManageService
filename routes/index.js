@@ -6,7 +6,7 @@ var User = require('../models/user').User;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('index.ect', {
+    res.render('index', {
         title: 'topページ',
         errors: {}
     });
@@ -18,13 +18,13 @@ router.get('/users', function(req, res, next) {
     // 全ユーザ取得
     User.find({}, function(err, data) {
         if (err) {
-            res.render('/users/index', {
+            res.render('users', {
                 title: 'ユーザ一覧取得エラー',
                 errors: err.erros
             });
         } else {
-           res.render('/users/index', {
-               data: data
+           res.render('users', {
+               users: data
            });
         }
     });

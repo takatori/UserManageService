@@ -1,0 +1,24 @@
+<% extend 'layout' %>
+
+<% if @errors : %>
+<h2>@errors.message</h2>
+<% end %>
+
+<table border="1">
+	<tr>
+		<th>&nbsp;</th>
+		<th>ID</th>
+		<th>氏名</th>
+		<th>学年</th>
+	</tr>
+	
+	<% for user in @users : %>
+	<tr>
+		<td><button class="user_delete" id="<%= user.id %>">削除</button></td>
+		<td><%= user.id %></td>
+		<td><%= user.first_name %></td>
+		<td><%= user.group %></td>
+	</tr>
+	<% end %>
+</table>
+

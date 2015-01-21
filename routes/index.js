@@ -31,6 +31,21 @@ router.get('/users', function(req, res, next) {
     });
 });
 
+// 個人取得
+router.get('/users/{id}', function(req, res) {
+    User.findOne({id: req.params.id}, function(err) {
+        if (err) {
+            // TODO
+        } else {
+            res.render('user', {
+                user: data
+            });
+        }
+    });
+});
+
+
+
 /* 追加  */
 /* GET register page. */
 router.get('/register', function(req, res, next) {

@@ -13,6 +13,7 @@ router.get('/', function(req, res, next) {
 });
 
 
+/* 一覧取得 */
 /* GET user list page */
 router.get('/users', function(req, res, next) {
     // 全ユーザ取得
@@ -30,20 +31,18 @@ router.get('/users', function(req, res, next) {
     });
 });
 
-
+/* 追加  */
 /* GET register page. */
 router.get('/register', function(req, res, next) {
     res.render('register/index', {
-        title: 'ユーザ登録',
-        errors: {}
+        title: 'ユーザ登録'
     });
 });
 
 
-
-
+/* POST user */
 // POSTでフォームから飛んできたデータをモデルに保存、失敗したらフォームに戻す
-router.post('/register/confirm', function(req, res) {
+router.post('/register/confirm', function(req, res, next) {
     //var newUser = new User(req.body);
     User.create(req.body, function(err){
         if (err) {
@@ -59,10 +58,22 @@ router.post('/register/confirm', function(req, res) {
     });
 });
 
-router.get('/register/complete', function(req, res) {
+router.get('/register/complete', function(req, res, next) {
     res.render('register/complete', {
         title: 'ユーザ登録完了'
     });
+});
+
+
+/* 削除 */
+router.delete('/users/{id}', function(req, res, next) {
+   User.remove({id: req.params.id}, function(err) {
+       if (err) {
+           console.log(err);
+       } else {
+           res.redirect('/users');
+       }
+   });
 });
 
 module.exports = router;

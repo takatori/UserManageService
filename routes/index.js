@@ -13,6 +13,24 @@ router.get('/', function(req, res, next) {
 });
 
 
+/* GET user list page */
+router.get('/users', function(req, res, next) {
+    // 全ユーザ取得
+    User.find({}, function(err, data) {
+        if (err) {
+            res.render('/users/index', {
+                title: 'ユーザ一覧取得エラー',
+                errors: err.erros
+            });
+        } else {
+           res.render('/users/index', {
+               data: data
+           });
+        }
+    });
+});
+
+
 /* GET register page. */
 router.get('/register', function(req, res, next) {
     res.render('register/index', {
@@ -20,6 +38,8 @@ router.get('/register', function(req, res, next) {
         errors: {}
     });
 });
+
+
 
 
 // POSTでフォームから飛んできたデータをモデルに保存、失敗したらフォームに戻す

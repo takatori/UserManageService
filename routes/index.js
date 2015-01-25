@@ -54,7 +54,6 @@ router.get('/register', function(req, res, next) {
     });
 });
 
-
 /* POST user */
 // POSTでフォームから飛んできたデータをモデルに保存、失敗したらフォームに戻す
 router.post('/register/confirm', function(req, res, next) {
@@ -87,6 +86,22 @@ router.delete('/users/{id}', function(req, res, next) {
            console.log(err);
        } else {
            res.redirect('/users');
+       }
+   });
+});
+
+
+
+
+/*****************  API *****************************/
+
+
+router.delete('/api/users/{id}', function(req, res, next) {
+   User.remove({id: req.params.id}, function(err) {
+       if (err) {
+           res.send(err);
+       } else {
+           res.send("200");
        }
    });
 });

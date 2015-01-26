@@ -44,7 +44,7 @@ router.get('/login', function(req, res){
 
 /* 一覧取得 */
 /* GET user list page */
-router.get('/users', function(req, res, next) {
+router.get('/users', loginCheck, function(req, res, next) {
     // 全ユーザ取得
     User.find({}, function(err, data) {
         if (err) {
@@ -61,7 +61,7 @@ router.get('/users', function(req, res, next) {
 });
 
 // 個人取得
-router.get('/users/:id', function(req, res) {
+router.get('/users/:id', loginCheck, function(req, res) {
     User.findOne({id: req.params.id}, function(err, data) {
         if (err) {
             // TODO
@@ -110,7 +110,7 @@ router.get('/register/complete', function(req, res, next) {
 
 
 /* 削除 */
-router.delete('/users/:id', function(req, res, next) {
+router.delete('/users/:id', loginCheck, function(req, res, next) {
    User.remove({id: req.params.id}, function(err) {
        if (err) {
            console.log(err);

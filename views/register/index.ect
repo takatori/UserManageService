@@ -8,6 +8,13 @@
 			<div class="error-msg"><%- @errors.id.message %></div>
 			<% end %>
 		</dd>
+		<dt>PASSWORD</dt>
+		<dd>
+			<input type="password" name="password" value="<%= @password %>" placeholder="password" class="input full" />
+			<% if @errors.id : %>
+			<div class="error-msg"><%- @errors.id.password %></div>
+			<% end %>
+		</dd>
 		<dt>学籍番号</dt>
 		<dd>
 			<input type="text" name="sut_id" value="<%= @stu_id %>" placeholder="sut_id" class="input full" />

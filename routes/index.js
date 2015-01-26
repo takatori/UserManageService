@@ -3,15 +3,44 @@ var router = express.Router();
 
 var User = require('../models/user').User;
 
+var loginCheck = function(req, res, next) {
+    if (req.session.user) {
+        next();
+    } else {
+        res.redirect('/login');
+    }
+};
+
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', loginCheck, function(req, res, next) {
     res.render('index', {
         title: 'topページ',
         errors: {}
     });
 });
 
+/* GET Login page. */
+router.get('/login', function(req, res){
+
+    var id       = req.query.id;
+    var password = req.query.password;
+
+    var query    = {id: id, password: password};
+
+    User.findOne(query, function (err, data) {
+       console.log(data);
+        if (err) {
+            console.log(err);
+            // TODO
+        } else if (!data) {
+            res.render('login', { title: "Login"});
+        } else {
+            req.session.user = id;
+            res.redirect('/');
+        }
+    });
+});
 
 /* 一覧取得 */
 /* GET user list page */

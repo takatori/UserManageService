@@ -6,12 +6,11 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var http = require('http');
 var mongoose = require('mongoose');
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
 
 var config = require('./config');
-
 var routes = require('./routes/index');
-var users = require('./routes/users');
-
 
 var app = express();
 
@@ -36,9 +35,19 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+    secret: "secret",
+    store: new MongoStore({
+        db: 'session',
+        host: 'localhost'
+    }),
+    cookie: {
+        httpOnly: false,
+        maxAge: new Date(Date.now() + 60 * 60 * 1000)
+    }
+}));
 
 app.use('/', routes);
-app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -70,6 +79,7 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
+
 
 app.listen(3000);
 module.exports = app;

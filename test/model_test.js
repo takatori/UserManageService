@@ -13,6 +13,7 @@ describe('User: models', function () {
             // Create a User object to pass to User.create()
             var u = {
                 id: 'xxx',
+                password: 'aaa',
                 stu_id: '148x222x',
                 first_name: 'Satoshi',
                 last_name: 'Takatori',
@@ -33,6 +34,7 @@ describe('User: models', function () {
                 should.not.exist(err);
                 // verify that the returned user is what we expect
                 createdUser.id.should.equal('xxx');
+                createdUser.password.should.equal('aaa');
                 createdUser.stu_id.should.equal('148x222x');
                 createdUser.first_name.should.equal('Satoshi');
                 createdUser.last_name.should.equal('Takatori');

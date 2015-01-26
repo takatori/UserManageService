@@ -32,8 +32,8 @@ router.get('/users', function(req, res, next) {
 });
 
 // 個人取得
-router.get('/users/{id}', function(req, res) {
-    User.findOne({id: req.params.id}, function(err) {
+router.get('/users/:id', function(req, res) {
+    User.findOne({id: req.params.id}, function(err, data) {
         if (err) {
             // TODO
         } else {
@@ -50,7 +50,8 @@ router.get('/users/{id}', function(req, res) {
 /* GET register page. */
 router.get('/register', function(req, res, next) {
     res.render('register/index', {
-        title: 'ユーザ登録'
+        title: 'ユーザ登録',
+        errors: {}
     });
 });
 
@@ -80,7 +81,7 @@ router.get('/register/complete', function(req, res, next) {
 
 
 /* 削除 */
-router.delete('/users/{id}', function(req, res, next) {
+router.delete('/users/:id', function(req, res, next) {
    User.remove({id: req.params.id}, function(err) {
        if (err) {
            console.log(err);
@@ -96,7 +97,7 @@ router.delete('/users/{id}', function(req, res, next) {
 /*****************  API *****************************/
 
 
-router.delete('/api/users/{id}', function(req, res, next) {
+router.delete('/api/users/:id', function(req, res, next) {
    User.remove({id: req.params.id}, function(err) {
        if (err) {
            res.send(err);

@@ -1,15 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="jp">
 	<head>
-		<title>Express4 + ECT</title>
-		<link rel='stylesheet' href='/stylesheet/style.css' />
+		<title>UserManageServie</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<!-- Bootstrap core css-->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+		<!-- Bootstrap optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+		<!-- Custom styles for this template -->
+		<link rel="stylesheet" href="/public/stylesheets/style.css">
 	</head>
-	<body>
-		<head>
-			<li><a href="/">TOP</a></li>
-			<li><a href="/register">登録</a></li>
-			<li><a href="/users">一覧</a></li>
-		</head>
-		<% content %>
+
+	<body role="document">
+		<header>
+			<% include 'navbar' %>
+		</header>
+
+		<div class="container" role="main">
+			<% content %>
+		</div>
+
+		<!-- jQuery -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<!-- Bootstrap Include all compiled plugins -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 	</body>
 </html>
+

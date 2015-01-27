@@ -1,8 +1,21 @@
 <% extend 'layout' %>
 
-<h1><%= @title %></h1>
-<form action="/login" method="get">
-	<input type="text" name="id" placeholder="id" />
-	<input type="password" name="password" placeholder="password" />
-	<input type="submit" value="ログイン" />
-</form>
+<div class="hero-unit">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-9">
+				<h2>ログイン</h2>
+				<h1>UserManageServie</h1>
+			</div>
+			<div class="col-md-3">
+				<form action="/login" method="get">
+					<label for="inputId" class="sr-only">ID</label>
+					<input type="id" id="inputId" name="id" class="form-control" placeholder="ID" required autofocus>
+					<label for="inputPassword" class="sr-only">Password</label>
+					<input type="password" id="inputPassword" name="Password" class="form-control" placeholder="Password" required>
+					<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

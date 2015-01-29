@@ -1,111 +1,176 @@
 <% extend 'layout' %>
-<form action="/register/confirm"  method="post">
-	<dl>
-		<dt>ID</dt>
-		<dd>
-			<input type="text" name="id" value="<%= @id %>" placeholder="id" class="input full" />
-			<% if @errors.id : %>
-			<div class="error-msg"><%- @errors.id.message %></div>
-			<% end %>
-		</dd>
-		<dt>PASSWORD</dt>
-		<dd>
-			<input type="password" name="password" value="<%= @password %>" placeholder="password" class="input full" />
-			<% if @errors.id : %>
-			<div class="error-msg"><%- @errors.id.password %></div>
-			<% end %>
-		</dd>
-		<dt>学籍番号</dt>
-		<dd>
-			<input type="text" name="sut_id" value="<%= @stu_id %>" placeholder="sut_id" class="input full" />
-			<% if @errors.stu_id : %>
-			<div class="error-msg"><%- @errors.stu_id.message %></div>
-			<% end %>
-		</dd>
-		<dt>姓</dt>
-		<dd>
-			<input type="text" name="first_name" value="<%= @first_name %>" placeholder="first_name" class="input full" />
-			<% if @errors.first_name : %>
-			<div class="error-msg"><%- @errors.first_name.message %></div>
-			<% end %>
-		</dd>
-		<dt>名</dt>
-		<dd>
-			<input type="text" name="last_name" value="<%= @last_name %>" placeholder="last_name" class="input full" />
-			<% if @errors.last_name : %>
-			<div class="error-msg"><%- @errors.last_name.message %></div>
-			<% end %>
-		</dd>
-		<dt>ニックネーム</dt>
-		<dd>
-			<input type="text" name="nick_name" value="<%= @nick_name %>" placeholder="ニックネーム" class="input full" />
-			<% if @errors.nick_name : %>
-			<div class="error-msg"><%- @errors.nick_name.message %></div>
-			<% end %>
-		</dd>
-		<dt>性別</dt>
-		<dd>
-			<input type="text" name="sex" value="<%= @sex %>" placeholder="sex" class="input full" />
-			<% if @errors.sex : %>
-			<div class="error-msg"><%- @errors.sex.message %></div>
-			<% end %>
-		</dd>
-		<dt>誕生日</dt>
-		<dd>
-			<input type="date" name="birthday" value="<%= @birthday %>" placeholder="birthday" class="input full" />
-			<% if @errors.birthday : %>
-			<div class="error-msg"><%- @errors.birthday.message %></div>
-			<% end %>
-		</dd>
-		<dt>学年</dt>
-		<dd>
-			<input type="text" name="group" value="<%= @group %>" placeholder="group" class="input full" />
-			<% if @errors.group : %>
-			<div class="error-msg"><%- @errors.group.message %></div>
-			<% end %>
-		</dd>
-		<dt>電話番号</dt>
-		<dd>
-			<input type="text" name="tel" value="<%= @tel %>" placeholder="tel" class="input full" />
-			<% if @errors.tel : %>
-			<div class="error-msg"><%- @errors.tel.message %></div>
-			<% end %>
-		</dd>
-		<dt>携帯電話番号</dt>
-		<dd>
-			<input type="text" name="mobile_tel" value="<%= @mobile_tel %>" placeholder="mobile_tel" class="input full" />
-			<% if @errors.mobile_tel : %>
-			<div class="error-msg"><%- @errors.mobile_tel.message %></div>
-			<% end %>
-		</dd>
-		<dt>メールアドレス</dt>
-		<dd>
-			<input type="email" name="email" value="<%= @email %>" placeholder="info@example.com" class="input full" />
-			<% if @errors.email : %>
-			<div class="error-msg"><%- @errors.email.message %></div>
-			<% end %>
-		</dd>
-		<dt>住所</dt>
-		<dd>
-			<input type="text" name="addr" value="<%= @addr %>" placeholder="兵庫県神戸市灘区" class="input full" />
-			<% if @errors.addr : %>
-			<div class="error-msg"><%- @errors.addr.message %></div>
-			<% end %>
-		</dd>
-		<dt>実家住所</dt>
-		<dd>
-			<input type="text" name="home_addr" value="<%= @home_addr %>" placeholder="兵庫県神戸市灘区" class="input full" />
-			<% if @errors.home_addr : %>
-			<div class="error-msg"><%- @errors.home_addr.message %></div>
-			<% end %>
-		</dd>
-		<dt>アイコン画像</dt>
-		<dd>
-			<input type="text" name="icon_img" value="<%= @icon_img %>" placeholder="hogehog.png" class="input full" />
-			<% if @errors.icon_img : %>
-			<div class="error-msg"><%- @errors.icon_img.message %></div>
-			<% end %>
-		</dd>
-	</dl>
-	<input type="submit" value="登録">
-</form>
+
+<div class="jumbotron">
+	<h2>新規登録フォーム</h2>
+	<form action="/register/confirm"  method="post" class="form-horizontal">
+
+		<div class="form-group">
+			<label for="id" class="col-sm-2 control-label">ID</label>
+			<div class="col-sm-6">
+				<input type="text" name="id" value="<%= @id %>" placeholder="id" class="form-control" />
+				<% if @errors.id : %>
+				<div class="error-msg"><%- @errors.id.message %></div>
+				<% end %>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="id" class="col-sm-2 control-label">PASSWORD</label>
+			<div class="col-sm-6">
+				<input type="password" name="password" value="<%= @password %>" placeholder="password" class="form-control" />
+				<% if @errors.password : %>
+				<div class="error-msg"><%- @errors.password.message %></div>
+				<% end %>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="id" class="col-sm-2 control-label">学籍番号</label>
+			<div class="col-sm-6">
+				<input type="text" name="sut_id" value="<%= @stu_id %>" placeholder="sut_id" class="form-control" />
+				<% if @errors.stu_id : %>
+				<div class="error-msg"><%- @errors.stu_id.message %></div>
+				<% end %>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="id" class="col-sm-2 control-label">姓</label>
+			<div class="col-sm-6">
+				<input type="text" name="last_name" value="<%= @last_name %>" placeholder="山田" class="form-control" />
+				<% if @errors.last_name : %>
+				<div class="error-msg"><%- @errors.last_name.message %></div>
+				<% end %>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="id" class="col-sm-2 control-label">名</label>
+			<div class="col-sm-6">
+				<input type="text" name="first_name" value="<%= @first_name %>" placeholder="太郎" class="form-control" />
+				<% if @errors.first_name : %>
+				<div class="error-msg"><%- @errors.first_name.message %></div>
+				<% end %>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="id" class="col-sm-2 control-label">ニックネーム</label>
+			<div class="col-sm-6">
+				<input type="text" name="nick_name" value="<%= @nick_name %>" placeholder="taro" class="form-control" />
+				<% if @errors.nick_name : %>
+				<div class="error-msg"><%- @errors.nick_name.message %></div>
+				<% end %>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="id" class="col-sm-2 control-label">性別</label>
+			<div class="radio">
+				<label class="radio-inline">
+					<input type="radio" name="sex" id="sex_male" value="male">男性
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="sex" id="sex_female" value="female">女性
+				</label>
+				<% if @errors.sex : %>
+				<div class="error-msg"><%- @errors.sex.message %></div>
+				<% end %>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="id" class="col-sm-2 control-label">誕生日</label>
+			<div class="col-sm-6">
+				<input type="date" name="birthday" value="<%= @birthday %>" class="form-control" />
+				<% if @errors.birthday : %>
+				<div class="error-msg"><%- @errors.birthday.message %></div>
+				<% end %>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="id" class="col-sm-2 control-label">学年</label>
+			<div class="radio">
+				<label class="radio-inline">
+					<input type="radio" name="group" id="group_staff" value="Staff">Staff
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="group" id="group_d3" value="D3">D3
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="group" id="group_d2" value="D2">D2
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="group" id="group_d1" value="D1">D1
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="group" id="group_m2" value="M2">M2
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="group" id="group_m1" value="M1">M1
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="group" id="group_b4" value="B4">B4
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="group" id="group_others" value="Others">Others
+				</label>
+				<% if @errors.group : %>
+				<div class="error-msg"><%- @errors.group.message %></div>
+				<% end %>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="id" class="col-sm-2 control-label">電話番号</label>
+			<div class="col-sm-6">
+				<input type="text" name="tel" value="<%= @tel %>" placeholder="000-0000-0000" class="form-control" />
+				<% if @errors.tel : %>
+				<div class="error-msg"><%- @errors.tel.message %></div>
+				<% end %>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="id" class="col-sm-2 control-label">携帯番号</label>
+			<div class="col-sm-6">
+				<input type="text" name="mobile_tel" value="<%= @mobile_tel %>" placeholder="111-1111-1111" class="form-control" />
+				<% if @errors.mobile_tel : %>
+				<div class="error-msg"><%- @errors.mobile_tel.message %></div>
+				<% end %>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="id" class="col-sm-2 control-label">メールアドレス</label>
+			<div class="col-sm-6">
+				<input type="email" name="email" value="<%= @email %>" placeholder="taro@example.com" class="form-control" />
+				<% if @errors.email : %>
+				<div class="error-msg"><%- @errors.email.message %></div>
+				<% end %>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="id" class="col-sm-2 control-label">住所</label>
+			<div class="col-sm-6">
+				<input type="text" name="addr" value="<%= @addr %>" class="form-control" />
+				<% if @errors.addr : %>
+				<div class="error-msg"><%- @errors.addr.message %></div>
+				<% end %>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="id" class="col-sm-2 control-label">実家住所</label>
+			<div class="col-sm-6">
+				<input type="text" name="home_addr" value="<%= @home_addr %>" class="form-control" />
+				<% if @errors.home_addr : %>
+				<div class="error-msg"><%- @errors.home_addr.message %></div>
+				<% end %>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="id" class="col-sm-2 control-label">アイコン画像</label>
+			<div class="col-sm-6">
+				<input type="file" name="icon_img" value="<%= @icon_img %>" class="form-control" />
+				<% if @errors.icon_img : %>
+				<div class="error-msg"><%- @errors.icon_img.message %></div>
+				<% end %>
+			</div>
+		</div>
+		<div class="form-group row">
+			<div class="col-sm-2 col-sm-offset-9">
+				<input type="submit" value="登録" class="btn btn-primary form-control">
+			</div>
+		</div>
+	</form>
+</div>

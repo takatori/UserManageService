@@ -15,7 +15,7 @@ var loginCheck = function(req, res, next) {
 /* GET home page. */
 router.get('/', loginCheck, function(req, res, next) {
     res.render('index', {
-        title: 'topページ',
+        title: 'UserManageService',
         errors: {}
     });
 });

@@ -29,12 +29,10 @@ router.get('/login', function(req, res){
     var query    = {id: id, password: password};
 
     User.findOne(query, function (err, data) {
-       console.log(data);
         if (err) {
-            console.log(err);
-            // TODO
+            res.render('login', { errors: "エラーが発生しました。管理者に問い合わせてください。" });            
         } else if (!data) {
-            res.render('login', { title: "Login"});
+            res.render('login', { errors: "パスワードが間違っているかアカウントが存在しません" });            
         } else {
             req.session.user = id;
             res.redirect('/');

@@ -46,7 +46,9 @@ app.use(session({
     cookie: {
         httpOnly: false,
         maxAge: new Date(Date.now() + 60 * 60 * 1000)
-    }
+    },
+    resave: false,
+    saveUninitialized: false
 }));
 
 app.use('/', routes);

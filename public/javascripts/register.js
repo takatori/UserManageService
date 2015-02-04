@@ -1,4 +1,3 @@
-
 // html5のFileAPIを用いてアイコン画像をbase64変換してアップロードする
 (function() {
     "use strict";
@@ -9,14 +8,17 @@
         var input_type      = icon_file.type;                 // 入力のMIMEタイプ
         var available_type  = ['image/jpeg','image/png'];     // 許可されいているMIMEタイプ           
         var size            = icon_file.size;                 // ファイル容量 (byte)
-        var limit           = 100000;                         // ファイルサイズ制限 byte, 100KB
+        var limit           = 1000000;                         // ファイルサイズ制限 byte, 10000KB
 
         
         var reader = new FileReader();
         
         // ファイル読み込み後の処理
         reader.addEventListener("loadend", function (e) {
-            $('#icon_base64_img').val(reader.result); // formに値を設定
+            var base64URL = reader.result;
+            $('#icon_thumbnail').attr("src", base64URL);
+            $('#icon_base64_img').val(base64URL); // formに値を設定
+            console.log($('#icon_base64_img').val());
         });
 
         // ファイルのチェック
@@ -42,7 +44,7 @@
     // 入力ファイルの大きさをチェックする
     function checkSize(size, limit) {
         if (size > limit) {
-            alert('100KBを超えています。100KB以下のファイルを選択してください。');
+            alert('1000KBを超えています。1000KB以下のファイルを選択してください。');
             return false;
         } else {
             return true;

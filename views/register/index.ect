@@ -160,7 +160,7 @@
 				<% end %>
 			</div>
 		</div>
-		<div class="form-group">
+		<div class="form-group" style="visibility: hidden;">
 			<label for="icon_img" class="col-sm-2 control-label">アイコン画像</label>
 			<div class="col-sm-6">
 				<input id="icon_base64_img" type="text" name="icon_img" value="<%= @icon_img %>" class="form-control" />
@@ -179,5 +179,8 @@
 	<label for="icon_file" class="col-sm-2 control-label">アイコン画像</label>
 	<div class="col-sm-6">
 		<input id="icon_file" type="file"  class="form-control" accept="iamge/jpeg, image/png"/>
+	</div>
+	<div>
+		<img id="icon_thumbnail" src="" class="img-rounded" style="width: 140px; height: 140px;">
 	</div>
 </div>

@@ -14,12 +14,9 @@
 	<% for user in @users : %>
 		<div class="col-sm-6 col-md-4">
 			<div class="thumbnail">
-				<img src="<%= user.icon_img %>">
-				<div class="caption">
-					<h3><%= user.last_name %> <%= user.first_name %></h3>
-					<p>学年: <%= user.group %></a></p>
-					<p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-				</div>
+				<a href="/users/<%= user.id %>">
+				<img src="<%= user.icon_img %>" class="img-rounded" style="width:300px; height:300px;">
+				</a>
 			</div>
 		</div>
 	<% end %>

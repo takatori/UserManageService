@@ -29,12 +29,12 @@ mongoose.connect(app.get('dbUrl'));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
-// placing css in /public/stylesheets
-app.use(express.static(path.join(__dirname, 'public/stylesheets')));
-app.use(express.static(path.join(__dirname, 'public/javascripts')));
+// placing css and javascript in /public/
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+//app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(cookieParser());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));

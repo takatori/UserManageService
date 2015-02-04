@@ -8,7 +8,7 @@
         var input_type      = icon_file.type;                 // 入力のMIMEタイプ
         var available_type  = ['image/jpeg','image/png'];     // 許可されいているMIMEタイプ           
         var size            = icon_file.size;                 // ファイル容量 (byte)
-        var limit           = 1000000;                         // ファイルサイズ制限 byte, 10000KB
+        var limit           = 100000;                            // ファイルサイズ制限 byte, 100KB
 
         
         var reader = new FileReader();
@@ -44,7 +44,7 @@
     // 入力ファイルの大きさをチェックする
     function checkSize(size, limit) {
         if (size > limit) {
-            alert('1000KBを超えています。1000KB以下のファイルを選択してください。');
+            alert('100KBを超えています。100KB以下のファイルを選択してください。');
             return false;
         } else {
             return true;

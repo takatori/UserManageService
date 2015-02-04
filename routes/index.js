@@ -86,7 +86,9 @@ router.get('/register', function(req, res, next) {
 /* POST user */
 // POSTでフォームから飛んできたデータをモデルに保存、失敗したらフォームに戻す
 router.post('/register/confirm', function(req, res, next) {
-    //var newUser = new User(req.body);
+ 
+    console.log(req.body);
+
     User.create(req.body, function(err){
         if (err) {
             res.render('register/index', {

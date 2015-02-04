@@ -31,6 +31,7 @@ mongoose.connect(app.get('dbUrl'));
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 // placing css in /public/stylesheets
 app.use(express.static(path.join(__dirname, 'public/stylesheets')));
+app.use(express.static(path.join(__dirname, 'public/javascripts')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

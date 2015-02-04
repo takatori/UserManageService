@@ -6,27 +6,26 @@
 
 <div class="jumbotron">
 	<form action="/register/confirm"  method="post" class="form-horizontal">
-
 		<div class="form-group">
 			<label for="id" class="col-sm-2 control-label">ID</label>
 			<div class="col-sm-6">
-				<input type="text" name="id" value="<%= @id %>" placeholder="id" class="form-control" />
+				<input type="text" name="id" value="<%= @id %>" placeholder="id" class="form-control" required/>
 				<% if @errors.id : %>
 				<div class="error-msg"><%- @errors.id.message %></div>
 				<% end %>
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="id" class="col-sm-2 control-label">PASSWORD</label>
+			<label for="password" class="col-sm-2 control-label">PASSWORD</label>
 			<div class="col-sm-6">
-				<input type="password" name="password" value="<%= @password %>" placeholder="password" class="form-control" />
+				<input type="password" name="password" value="<%= @password %>" placeholder="password" class="form-control" required/>
 				<% if @errors.password : %>
 				<div class="error-msg"><%- @errors.password.message %></div>
 				<% end %>
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="id" class="col-sm-2 control-label">学籍番号</label>
+			<label for="stu_id" class="col-sm-2 control-label">学籍番号</label>
 			<div class="col-sm-6">
 				<input type="text" name="sut_id" value="<%= @stu_id %>" placeholder="sut_id" class="form-control" />
 				<% if @errors.stu_id : %>
@@ -35,34 +34,34 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="id" class="col-sm-2 control-label">姓</label>
+			<label for="last_name" class="col-sm-2 control-label">姓</label>
 			<div class="col-sm-6">
-				<input type="text" name="last_name" value="<%= @last_name %>" placeholder="山田" class="form-control" />
+				<input type="text" name="last_name" value="<%= @last_name %>" placeholder="山田" class="form-control" required/>
 				<% if @errors.last_name : %>
 				<div class="error-msg"><%- @errors.last_name.message %></div>
 				<% end %>
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="id" class="col-sm-2 control-label">名</label>
+			<label for="first_name" class="col-sm-2 control-label">名</label>
 			<div class="col-sm-6">
-				<input type="text" name="first_name" value="<%= @first_name %>" placeholder="太郎" class="form-control" />
+				<input type="text" name="first_name" value="<%= @first_name %>" placeholder="太郎" class="form-control" required/>
 				<% if @errors.first_name : %>
 				<div class="error-msg"><%- @errors.first_name.message %></div>
 				<% end %>
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="id" class="col-sm-2 control-label">ニックネーム</label>
+			<label for="nick_name" class="col-sm-2 control-label">ニックネーム</label>
 			<div class="col-sm-6">
-				<input type="text" name="nick_name" value="<%= @nick_name %>" placeholder="taro" class="form-control" />
+				<input type="text" name="nick_name" value="<%= @nick_name %>" placeholder="taro" class="form-control" required/>
 				<% if @errors.nick_name : %>
 				<div class="error-msg"><%- @errors.nick_name.message %></div>
 				<% end %>
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="id" class="col-sm-2 control-label">性別</label>
+			<label for="sex" class="col-sm-2 control-label">性別</label>
 			<div class="radio">
 				<label class="radio-inline">
 					<input type="radio" name="sex" id="sex_male" value="male">男性
@@ -76,7 +75,7 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="id" class="col-sm-2 control-label">誕生日</label>
+			<label for="birthday" class="col-sm-2 control-label">誕生日</label>
 			<div class="col-sm-6">
 				<input type="date" name="birthday" value="<%= @birthday %>" class="form-control" />
 				<% if @errors.birthday : %>
@@ -85,7 +84,7 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="id" class="col-sm-2 control-label">学年</label>
+			<label for="group" class="col-sm-2 control-label">学年</label>
 			<div class="radio">
 				<label class="radio-inline">
 					<input type="radio" name="group" id="group_staff" value="Staff">Staff
@@ -117,7 +116,7 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="id" class="col-sm-2 control-label">電話番号</label>
+			<label for="tel" class="col-sm-2 control-label">電話番号</label>
 			<div class="col-sm-6">
 				<input type="text" name="tel" value="<%= @tel %>" placeholder="000-0000-0000" class="form-control" />
 				<% if @errors.tel : %>
@@ -126,7 +125,7 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="id" class="col-sm-2 control-label">携帯番号</label>
+			<label for="mobile_tel" class="col-sm-2 control-label">携帯番号</label>
 			<div class="col-sm-6">
 				<input type="text" name="mobile_tel" value="<%= @mobile_tel %>" placeholder="111-1111-1111" class="form-control" />
 				<% if @errors.mobile_tel : %>
@@ -135,7 +134,7 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="id" class="col-sm-2 control-label">メールアドレス</label>
+			<label for="email" class="col-sm-2 control-label">メールアドレス</label>
 			<div class="col-sm-6">
 				<input type="email" name="email" value="<%= @email %>" placeholder="taro@example.com" class="form-control" />
 				<% if @errors.email : %>
@@ -144,7 +143,7 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="id" class="col-sm-2 control-label">住所</label>
+			<label for="addr" class="col-sm-2 control-label">住所</label>
 			<div class="col-sm-6">
 				<input type="text" name="addr" value="<%= @addr %>" class="form-control" />
 				<% if @errors.addr : %>
@@ -153,7 +152,7 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="id" class="col-sm-2 control-label">実家住所</label>
+			<label for="home_addr" class="col-sm-2 control-label">実家住所</label>
 			<div class="col-sm-6">
 				<input type="text" name="home_addr" value="<%= @home_addr %>" class="form-control" />
 				<% if @errors.home_addr : %>
@@ -162,9 +161,9 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="id" class="col-sm-2 control-label">アイコン画像</label>
+			<label for="icon_img" class="col-sm-2 control-label">アイコン画像</label>
 			<div class="col-sm-6">
-				<input type="file" name="icon_img" value="<%= @icon_img %>" class="form-control" />
+				<input id="icon_base64_img" type="text" name="icon_img" value="<%= @icon_img %>" class="form-control" />
 				<% if @errors.icon_img : %>
 				<div class="error-msg"><%- @errors.icon_img.message %></div>
 				<% end %>
@@ -176,4 +175,9 @@
 			</div>
 		</div>
 	</form>
+
+	<label for="icon_file" class="col-sm-2 control-label">アイコン画像</label>
+	<div class="col-sm-6">
+		<input id="icon_file" type="file"  class="form-control" accept="iamge/jpeg, image/png"/>
+	</div>
 </div>

@@ -14,7 +14,7 @@
 	<% for user in @users : %>
 		<div class="col-sm-6 col-md-4">
 			<div class="thumbnail">
-				<img src="..." alt="...">
+				<img src="<%= user.icon_img %>">
 				<div class="caption">
 					<h3><%= user.last_name %> <%= user.first_name %></h3>
 					<p>学年: <%= user.group %></a></p>

@@ -4,7 +4,7 @@
 	<h1><%= @user.id %></h1>
 </div>
 
-<table border="1">
+<table class="table table-bordered">
 	<tr>
 		<th>KEY</th>
 		<th>VALUE</th>
@@ -67,6 +67,6 @@
 	</tr>
 	<tr>
 		<td>アイコン画像</td>
-		<td><%= @user.icon_img %></td>
+		<td><img class="icon_thumbnail" src="<%= @user.icon_img %>"></td>
 	</tr>
 </table>

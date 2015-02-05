@@ -1,18 +1,9 @@
 <% extend 'layout' %>
 
-<div class="page-header">
-	<h1>ユーザ一覧</h1>
-</div>
-
-
-	<% if @errors : %>
-	<h2>@errors.message</h2>
-	<% end %>
-
-
+<div class="inner">
 	<div class="row">
 	<% for user in @users : %>
-		<div class="col-sm-6 col-md-4">
+		<div class="col-sm-4 col-md-4">
 			<div class="thumbnail">
 				<a href="/users/<%= user.id %>">
 				<img src="<%= user.icon_img %>" class="img-rounded" style="width:300px; height:300px;">
@@ -21,5 +12,5 @@
 		</div>
 	<% end %>
 	</div>
-
+</div>
 

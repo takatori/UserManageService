@@ -21,6 +21,7 @@
     "mocha": "~2.1.0",
     "should": "~4.6.1",
     "express-session": "~1.10.1",
-    "connect-mongo": "~0.7.0"
+    "connect-mongo": "~0.7.0",
+    "bootflat": "~2.0.4"
   }
 }

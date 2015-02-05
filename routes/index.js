@@ -14,7 +14,7 @@ var loginCheck = function(req, res, next) {
 
 
 /* GET home page. */
-router.get('/', loginCheck, function(req, res, next) {
+router.get('/', function(req, res, next) {
     res.render('index', {
         title: 'UserManageService',
         errors: {}

@@ -81,8 +81,7 @@ body {
 .inner-content {
     margin-top: 100px;
     margin-bottom: 100px;
-    background-color: #044F67;
-    -webkit-filter: opacity(50%);
+    background: rgba(4, 79, 103, 0.5);
 }
 
 

@@ -1,6 +1,10 @@
 language: node_js
 node_js:
-  - "0.10"
-
-services: 
-  - mongodb
+- '0.10'
+services:
+- mongodb
+deploy:
+  provider: heroku
+  app: user-manage-service
+  api_key:
+    secure: CAFiU8Ul7rUMhUUQrm6BiKHsZalx/0LJ64ipeQXngsyrQMTjL+YXC0wEY734lqZ2QTD3a0HTpGKStBUcYVL533l8EPalStk1MXFD/A1x6gKxGYKOWo6NL9rRgM3xMGRtz//XtT5YVAz90SarXMdN8e/+Jv/0lJ6o+n5f7v12iiE=

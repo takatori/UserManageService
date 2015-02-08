@@ -111,7 +111,7 @@ router.get('/register/complete', function(req, res, next) {
 
 
 /* 削除 */
-router.delete('/users/:id', loginCheck, function(req, res, next) {
+router.get('/users/delete/:id', loginCheck, function(req, res, next) {
    User.remove({id: req.params.id}, function(err) {
        if (err) {
            console.log(err);

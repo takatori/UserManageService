@@ -71,5 +71,8 @@
 				<td><img class="icon_thumbnail" src="<%= @user.icon_img %>" style="width: 128px; height: 128px;"></td>
 			</tr>
 		</table>
+		<form action="/users/delete/<%= @user.id %>" method="GET">
+			<button type="submit" class="ghost_button"><h4>DELETE</h4></button>
+		</form>
 	</div>
 </div>

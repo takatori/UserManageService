@@ -27,7 +27,7 @@
 			<div class="form-group">
 				<label for="stu_id" class="col-sm-2 control-label">学籍番号</label>
 				<div class="col-sm-6">
-					<input type="text" name="sut_id" value="<%= @stu_id %>" placeholder="sut_id" class="form-control" />
+					<input type="text" name="stu_id" value="<%= @stu_id %>" placeholder="sut_id" class="form-control" />
 					<% if @errors.stu_id : %>
 					<div class="error-msg"><%- @errors.stu_id.message %></div>
 					<% end %>
@@ -160,13 +160,12 @@
 					<% end %>
 				</div>
 			</div>
-			<div class="form-group" style="visibility: hidden;">
+			<div class="form-group">
 				<label for="icon_img" class="col-sm-2 control-label">アイコン画像</label>
 				<div class="col-sm-6">
-					<input id="icon_base64_img" type="text" name="icon_img" value="<%= @icon_img %>" class="form-control" />
-					<% if @errors.icon_img : %>
-					<div class="error-msg"><%- @errors.icon_img.message %></div>
-					<% end %>
+					<img id="image-preview" class="img-rounded" style="width: 140px; height: 140px;">
+					<input id="img-file-selector" type='file' accept="image/jpeg, image/png" class='form-control'>
+					<input id="base64-icon-img" type='text' name="icon_img" class='form-control hidden'>					
 				</div>
 			</div>
 			<div class="form-group row">
@@ -175,13 +174,5 @@
 				</div>
 			</div>
 		</form>
-
-		<label for="icon_file" class="col-sm-2 control-label">アイコン画像</label>
-		<div class="col-sm-6">
-			<input id="icon_file" type="file"  class="form-control" accept="iamge/jpeg, image/png"/>
-		</div>
-		<div>
-			<img id="icon_thumbnail" src="" class="img-rounded" style="width: 140px; height: 140px;">
-		</div>
 	</div>
 </div>

@@ -4,12 +4,12 @@ var uniqueValidator = require('mongoose-unique-validator');
 var UserSchema = new mongoose.Schema({
     id :        { type: String, default: '', required: true, unique: true},    // id 登録ID
     password:   { type: String, required: true}, // パスワード
-    stu_id :    { type: String, default: ''},                   // stu_id 学籍番号
+    stu_id :    { type: String},                   // stu_id 学籍番号
     first_name: { type: String, required: true },   // 名
     last_name:  { type: String, required: true },   // 姓
     nick_name:  { type: String, required: true},    // 愛称・ニックネーム
     sex:        { type: String}, // 性別 [male, female]
-    birthday:   { type: String}, // 生年月日
+    birthday:   { type: Date}, // 生年月日
     group:      { type: String}, // 学年 [B3, B4, M1, M2, Stuff, 20xxGraduates, ...]
     tel:        { type: String}, // 電話番号
     mobile_tel: { type: String}, // 携帯電話番号

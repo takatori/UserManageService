@@ -2,8 +2,10 @@
 (function() {
     "use strict";
 
-    $('#icon_file').change(function () {
+    var $preview = $('#image-preview');
+    var $file = $('#img-file-selector');
 
+    $file.change(function () {
         var icon_file       = this.files[0];                  // 入力ファイル
         var input_type      = icon_file.type;                 // 入力のMIMEタイプ
         var available_type  = ['image/jpeg','image/png'];     // 許可されいているMIMEタイプ           
@@ -16,16 +18,15 @@
         // ファイル読み込み後の処理
         reader.addEventListener("loadend", function (e) {
             var base64URL = reader.result;
-            $('#icon_thumbnail').attr("src", base64URL);
-            $('#icon_base64_img').val(base64URL); // formに値を設定
-            console.log($('#icon_base64_img').val());
+            $preview.attr("src", base64URL);
+            $('#base64-icon-img').val(base64URL);
         });
 
         // ファイルのチェック
         if (icon_file && checkMIME(input_type, available_type) && checkSize(size, limit)) {
             reader.readAsDataURL(icon_file);
         } else {
-            $('#icon_base64_img').val("");
+            $file.val("");
             return;
         }
     });
@@ -52,3 +53,5 @@
     }
 
 })((this || 0).self || global);
+
+

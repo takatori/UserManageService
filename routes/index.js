@@ -1,7 +1,11 @@
+/*
+ * Application
+ * viewを提供する
+ * レスポンスはテンプレートをレンダリングして返す
+ */
 
 var express = require('express');
 var router = express.Router();
-
 var User = require('../models/user').User;
 
 var loginCheck = function(req, res, next) {
@@ -13,7 +17,7 @@ var loginCheck = function(req, res, next) {
 };
 
 
-/* GET home page. */
+
 router.get('/', function(req, res, next) {
     res.render('index', {
         title: 'UserManageService',
@@ -21,7 +25,7 @@ router.get('/', function(req, res, next) {
     });
 });
 
-/* GET Login page. */
+
 router.get('/login', function(req, res){
 
     var id       = req.query.id;
@@ -41,8 +45,8 @@ router.get('/login', function(req, res){
     });
 });
 
-/* 一覧取得 */
-/* GET user list page */
+// GET
+/* List */
 router.get('/users', loginCheck, function(req, res, next) {
     // 全ユーザ取得
     User.find({}, function(err, data) {
@@ -59,7 +63,8 @@ router.get('/users', loginCheck, function(req, res, next) {
     });
 });
 
-// 個人取得
+
+/* Unit */
 router.get('/users/:id', loginCheck, function(req, res) {
     User.findOne({id: req.params.id}, function(err, data) {
         if (err) {
@@ -74,8 +79,8 @@ router.get('/users/:id', loginCheck, function(req, res) {
 
 
 
-/* 追加  */
-/* GET register page. */
+// CREATE
+/* */
 router.get('/register', function(req, res, next) {
     res.render('register/index', {
         title: 'ユーザ登録',
@@ -110,7 +115,28 @@ router.get('/register/complete', function(req, res, next) {
 });
 
 
-/* 削除 */
+// UPDATE
+router.post('/users/:id', function(req, res, next) {
+    console.log(req.body);
+    var userId = req.params.id;    
+    var userData = req.body;
+    
+    User.findOne({id: userId}, function(err, user){
+        if (err) {
+            res.status(500).json(err);            
+        } else {
+            for (var key in userData) {
+                user[key] = userData[key];
+            }
+            user.save();
+            res.status(200).json('succeed in create user:' + userData);            
+        }
+    });
+});
+
+
+
+// DELETE
 router.get('/users/delete/:id', loginCheck, function(req, res, next) {
    User.remove({id: req.params.id}, function(err) {
        if (err) {
@@ -121,20 +147,5 @@ router.get('/users/delete/:id', loginCheck, function(req, res, next) {
    });
 });
 
-
-
-
-/*****************  API *****************************/
-
-
-router.delete('/api/users/:id', function(req, res, next) {
-   User.remove({id: req.params.id}, function(err) {
-       if (err) {
-           res.send(err);
-       } else {
-           res.send("200");
-       }
-   });
-});
 
 module.exports = router;

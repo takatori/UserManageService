@@ -65,17 +65,13 @@ router.post('/users/:id', function(req, res, next) {
     var userId = req.params.id;    
     var userData = req.body;
     
-    User.findOne({id: userId}, function(err, user){
+    User.update({id: userId}, userData, function(err){
         if (err) {
-            res.status(500).json(err);            
+            res.status(500);
         } else {
-            for (var key in userData) {
-                user[key] = userData[key];
-            }
-            user.save();
-            res.status(200).json('succeed in create user:' + userData);            
+            res.status(200).json('succeed in udpate user:' + userData);
         }
-    });
+    });    
 });
 
 
@@ -93,7 +89,73 @@ router.delete('/users/:id', function(req, res, next) {
 });
 
 
+
 // Others
+/* 卒業 */
+router.get('/graduate/:id', function (req, res, next) {
+    var userId = req.params.id;
+
+    var graduationYear = (new Date).getFullYear() + 'Graduates';
+    var userData = { group: graduationYear };
+    
+    User.update({id: userId}, userData, function(err){
+        if (err) {
+            res.status(500);
+        } else {
+            res.status(200).json('succeed in udpate user:' + userData);
+        }
+    });        
+});
+
+/* 進級 */
+router.get('/promotion/:id', function (req, res, next) {
+    var userId = req.params.id;
+    User.findOne({id: userId}, function(err, user){
+        if (err) {
+            res.status(500);
+        } else {
+            if (!user) res.status(500).send('Cannot find User:' + userId);
+
+            var grade = { group: promotion(user.group)};
+            User.update({id: userId}, grade, function (err){
+                if (err) {
+                    res.status(500);
+                } else {
+                    res.status(200).json('succeed in udpate user:' + userId);                    
+                }
+            });
+
+        }
+    });        
+});
+
+// 進級処理
+function promotion (grade) {
+    switch(grade){
+    case 'B4':
+        grade = 'M1';
+        break;
+    case 'M1':
+        grade = 'M2';                
+        break;
+    case 'M2':
+        grade = 'D1';                                
+        break;
+    case 'D1':
+        grade = 'D2';                                                
+        break;
+    case 'D2':
+        grade = 'D3';                                                                
+        break;
+    case 'D3':
+        break;
+    default:
+        break;
+    }
+    return grade;
+}
+
+// Forbidden
 router.get('*', function(req, res){
 	res.status(403).send('Forbidden');
 });

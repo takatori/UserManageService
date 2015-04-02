@@ -134,7 +134,6 @@ router.post('/users/:id', function(req, res, next) {
 });
 
 
-
 // DELETE
 router.get('/users/delete/:id', loginCheck, function(req, res, next) {
    User.remove({id: req.params.id}, function(err) {

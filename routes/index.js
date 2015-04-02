@@ -32,7 +32,6 @@ router.get('/login', function(req, res){
     var password = req.query.password;
 
     var query    = {id: id, password: password};
-
     User.findOne(query, function (err, data) {
         if (err) {
             res.render('login', { errors: "エラーが発生しました。管理者に問い合わせてください。" });            
@@ -121,15 +120,11 @@ router.post('/users/:id', function(req, res, next) {
     var userId = req.params.id;    
     var userData = req.body;
     
-    User.findOne({id: userId}, function(err, user){
+    User.update({id: userId}, userData, function(err){
         if (err) {
-            res.status(500).json(err);            
+            res.status(500);
         } else {
-            for (var key in userData) {
-                user[key] = userData[key];
-            }
-            user.save();
-            res.status(200).json('succeed in create user:' + userData);            
+            res.status(200).send('ok');
         }
     });
 });

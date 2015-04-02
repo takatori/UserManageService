@@ -5,3 +5,20 @@ body {
 .site-wrapper-inner {
     margin: 5%;
 }
+
+/* Ghost button */
+.ghost_button{
+  display: inline-block;
+  padding: 20px 20px;
+  border: solid 2px #fff;
+  border-radius: 3px;
+  background: rgba(0,0,0,0.2);
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: Helvetica, Arial, sans-serif;
+}
+.ghost_button:hover{
+  color: #333;
+  background: red;
+}

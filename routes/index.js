@@ -7,6 +7,7 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user').User;
+var config = require('../config');
 
 var loginCheck = function(req, res, next) {
     if (req.session.user) {
@@ -47,8 +48,10 @@ router.get('/login', function(req, res){
 // GET
 /* List */
 router.get('/users', loginCheck, function(req, res, next) {
-    // 全ユーザ取得
-    User.find({}, function(err, data) {
+    
+    // 現在のユーザ取得
+    var query = { group: { $in : config.current }};
+    User.find(query, function(err, data) {
         if (err) {
             res.render('users', {
                 title: 'ユーザ一覧取得エラー',

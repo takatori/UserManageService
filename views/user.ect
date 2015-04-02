@@ -195,6 +195,12 @@
 				</td>
 			</tr>
 		</table>
+		<form action="/promotion/<%= @user.id %>" method="GET">
+			<button type="submit" class="ghost_button"><h4>進級</h4></button>
+		</form>
+		<form action="/graduate/<%= @user.id %>" method="GET">
+			<button type="submit" class="ghost_button"><h4>卒業</h4></button>
+		</form>		
 		<form action="/users/delete/<%= @user.id %>" method="GET">
 			<button type="submit" class="ghost_button"><h4>DELETE</h4></button>
 		</form>

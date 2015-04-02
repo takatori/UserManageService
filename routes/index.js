@@ -119,7 +119,7 @@ router.get('/register/complete', function(req, res, next) {
 
 
 // UPDATE
-router.post('/users/:id', function(req, res, next) {
+router.post('/users/:id', loginCheck, function(req, res, next) {
     console.log(req.body);
     var userId = req.params.id;    
     var userData = req.body;
@@ -144,6 +144,72 @@ router.get('/users/delete/:id', loginCheck, function(req, res, next) {
        }
    });
 });
+
+// Others
+/* 卒業 */
+router.get('/graduate/:id', function (req, res, next) {
+    var userId = req.params.id;
+
+    var graduationYear = (new Date).getFullYear() + 'Graduates';
+    var userData = { group: graduationYear };
+    
+    User.update({id: userId}, userData, function(err){
+        if (err) {
+            res.status(500).redirect('/users/' + userId);            
+        } else {
+            res.status(200).redirect('/users/' + userId);                        
+        }
+    });            
+});
+
+/* 進級 */
+router.get('/promotion/:id', function (req, res, next) {
+       var userId = req.params.id;
+    User.findOne({id: userId}, function(err, user){
+        if (err) {
+            res.status(500);
+        } else {
+            if (!user) res.status(500).send('Cannot find User:' + userId);
+
+            var grade = { group: promotion(user.group)};
+            User.update({id: userId}, grade, function (err){
+                if (err) {
+                    res.status(500).redirect('/users/' + userId);
+                } else {
+                    res.status(200).redirect('/users/' + userId);                    
+                }
+            });
+
+        }
+    });         
+});
+
+// 進級処理
+function promotion (grade) {
+    switch(grade){
+    case 'B4':
+        grade = 'M1';
+        break;
+    case 'M1':
+        grade = 'M2';                
+        break;
+    case 'M2':
+        grade = 'D1';                                
+        break;
+    case 'D1':
+        grade = 'D2';                                                
+        break;
+    case 'D2':
+        grade = 'D3';                                                                
+        break;
+    case 'D3':
+        break;
+    default:
+        break;
+    }
+    return grade;
+}
+
 
 
 module.exports = router;

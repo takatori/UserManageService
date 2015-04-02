@@ -51,7 +51,8 @@ router.get('/users', loginCheck, function(req, res, next) {
     
     // 現在のユーザ取得
     var query = { group: { $in : config.current }};
-    User.find(query, function(err, data) {
+    
+    User.find(query, {}, {sort:{group: -1}}, function(err, data) {
         if (err) {
             res.render('users', {
                 title: 'ユーザ一覧取得エラー',
@@ -127,7 +128,7 @@ router.post('/users/:id', function(req, res, next) {
         if (err) {
             res.status(500);
         } else {
-            res.status(200).send('ok');
+            res.redirect('/users/' + userId);
         }
     });
 });

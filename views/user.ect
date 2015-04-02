@@ -105,7 +105,7 @@
 			<tr>
 				<td>学年</td>
 				<td
-					<form id="state_form" method="post" class="form-inline">
+					<form id="state_form" actiion="/users/<%= @user.id %>" method="post" class="form-inline">
 						<select name="group" class="form-control">
 							<option value="" disabled selected><%= @user.group %></option>
 							<option value="Staff">Staff</option>
@@ -138,7 +138,7 @@
 				<td>
 					<form action="/users/<%= @user.id %>" method="post" class="form-inline">
 						<div class="form-group">
-							<input type="text" class="form-control" name="mobile_tel" value="<%= @user.mobile_tel %>">
+							<input type="text" class="form-control" name="mobile_tel" value="<%= @user.mobile_tel %>" placeholder="1111-2222-3333" >
 						</div>
 						<button type="submit" class="btn btn-default">Update</button>
 					</form>
@@ -171,7 +171,7 @@
 				<td>
 					<form action="/users/<%= @user.id %>" method="post" class="form-inline">
 						<div class="form-group">
-							<input type="text" class="form-control" name="hoem_addr" value="<%= @user.home_addr %>">
+							<input type="text" class="form-control" name="home_addr" value="<%= @user.home_addr %>">
 						</div>
 						<button type="submit" class="btn btn-default">Update</button>
 					</form>
@@ -181,7 +181,7 @@
 				<td>アイコン画像</td>
 				<td>
 					<% if @user.icon_img : %>
-					<img id="image-preview" class="media-object" src="<%= user.icon_img %>" style="width: 128px; height: 128px;">
+					<img id="image-preview" class="media-object" src="<%= @user.icon_img %>" style="width: 128px; height: 128px;">
 					<% else : %>
 					<img id="image-preview" class="media-object" src="/img/no.png" style="width: 128px; height: 128px;">
 					<% end %>

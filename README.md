@@ -21,12 +21,17 @@ UserManageService
 ## Usage
 ### 起動方法
 * 本番環境　
-  * run.sh -m prod
+```
+run.sh -m prod
+```
 * 開発環境
-  * run.sh
+```
+run.sh
+```
 * テスト
-  * run.sh -m test
-
+```
+run.sh -m test
+```
 * API Document
   * [apiary.io](http://docs.usermanageservice.apiary.io)
 

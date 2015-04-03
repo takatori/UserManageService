@@ -69,8 +69,7 @@ router.get('/users', loginCheck, function(req, res, next) {
                 errors: err.erros
             });
         } else {
-            console.log(data);
-           res.render('users2', {
+           res.render('user-list', {
                users: data
            });
         }

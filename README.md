@@ -23,7 +23,7 @@ UserManageService
 * 本番環境　
   * run.sh -m prod
 * 開発環境
-  * run.sh 
+  * run.sh
 * テスト
   * run.sh -m test
 

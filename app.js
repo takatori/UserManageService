@@ -64,8 +64,8 @@ app.use(session({
         mongooseConnection: mongoose.connection
     }),
     cookie: {
-        httpOnly: false,
-        maxAge: new Date(Date.now() + 60 * 60 * 1000)
+        httpOnly: false
+        //maxAge: new Date(Date.now() + 60 * 60 * 1000)
     },
     resave: false,
     saveUninitialized: false

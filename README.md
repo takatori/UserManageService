@@ -19,7 +19,7 @@ UserManageService
 * mongodb 
 
 ## Usage
-### 起動方法
+### 起動
 * 本番環境　
 ```
 run.sh -m prod
@@ -32,7 +32,18 @@ run.sh
 ```
 run.sh -m test
 ```
-* API Document
+### プロセス確認
+* 本番環境
+```
+npm run forever-list
+```
+### 終了
+* 本番環境
+```
+npm run foreve-stop $pid
+```
+
+## API Document
   * [apiary.io](http://docs.usermanageservice.apiary.io)
 
 

@@ -9,7 +9,7 @@ var UserSchema = new mongoose.Schema({
     last_name:  { type: String, required: true },   // 姓
     nick_name:  { type: String, required: true},    // 愛称・ニックネーム
     sex:        { type: String}, // 性別 [male, female]
-    birthday:   { type: Date}, // 生年月日
+    birthday:   { type: String}, // 生年月日
     group:      { type: String}, // 学年 [B3, B4, M1, M2, Stuff, 20xxGraduates, ...]
     tel:        { type: String}, // 電話番号
     mobile_tel: { type: String}, // 携帯電話番号

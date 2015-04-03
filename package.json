@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+      "start": "node app.js",
       "nodemon-start": "nodemon app.js",
       "forever-start": "node_modules/.bin/forever start app.js",
       "forever-list": "node_modules/.bin/forever list",

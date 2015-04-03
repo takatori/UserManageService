@@ -48,10 +48,20 @@ router.get('/login', function(req, res){
 // GET
 /* List */
 router.get('/users', loginCheck, function(req, res, next) {
-    
-    // 現在のユーザ取得
-    var query = { group: { $in : config.current }};
-    
+
+    var group = req.query.group;
+    var query = {};
+        
+    if(group === 'D') {
+        query = { group: { $in : config.doctor }};        
+    } else if (group === 'current'){
+        query = { group: { $in : config.current }};
+    } else if (!group){
+        query = {};        
+    } else {
+        query = { group: { $in : [group] }};                        
+    }
+
     User.find(query, {}, {sort:{group: -1}}, function(err, data) {
         if (err) {
             res.render('users', {
@@ -59,6 +69,7 @@ router.get('/users', loginCheck, function(req, res, next) {
                 errors: err.erros
             });
         } else {
+            console.log(data);
            res.render('users2', {
                users: data
            });

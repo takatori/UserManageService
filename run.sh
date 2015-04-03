@@ -25,7 +25,8 @@ fi
 
 # 起動コマンド
 if [ ${mode} = "prod" ]; then
-    eval $start_prod
+    #eval $start_prod
+    eval $start_dev   
 elif [ ${mode} = "test" ]; then
     eval $start_test
 else

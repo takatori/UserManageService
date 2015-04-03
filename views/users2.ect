@@ -1,9 +1,21 @@
 <% extend 'layout' %>
-
 <div class="inner-content">
 	<div class="page-header">
 		<h2>Members</h2>
 	</div>
+	
+	<ul class="nav nav-tabs">
+		<li role="presentation" class="active"><a href="/users?group=current">Current</a></li>
+		<li role="presentation"><a href="/users?group=Staff">Staff</a></li>
+		<li role="presentation"><a href="/users?group=D">Doctor</a></li>
+		<li role="presentation"><a href="/users?group=M2">M2</a></li>
+		<li role="presentation"><a href="/users?group=M1">M1</a></li>
+		<li role="presentation"><a href="/users?group=B4">B4</a></li>
+		<li role="presentation"><a href="/users">All</a></li>
+	</ul>
+
+
+
 	<div class="row">
 		<% for user in @users : %>
 		<div class="col-xs-4 col-md-3">
@@ -24,4 +36,3 @@
 		<% end %>
 	</div>
 </div>
-

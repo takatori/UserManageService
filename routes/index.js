@@ -18,7 +18,7 @@ var loginCheck = function(req, res, next) {
 };
 
 
-
+// TOP
 router.get('/', function(req, res, next) {
     res.render('index', {
         title: 'UserManageService',
@@ -26,7 +26,7 @@ router.get('/', function(req, res, next) {
     });
 });
 
-
+// LOGIN
 router.get('/login', function(req, res){
 
     var id       = req.query.id;

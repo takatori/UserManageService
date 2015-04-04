@@ -9,6 +9,7 @@ var router = express.Router();
 var User = require('../models/user').User;
 var config = require('../config');
 
+//===================== USER ==========================
 // GET
 /* List */
 /** ALL **/
@@ -154,6 +155,123 @@ function promotion (grade) {
     }
     return grade;
 }
+
+//===================== CONFIG ==========================
+
+// GET
+router.get('/users/:userId/configs', function (req, res, next) {
+    User.findOne({id: req.params.userId}, {configs: true}, function(err, data) {
+        if (err) {
+            res.status(500).json(err);            
+        } else {
+            res.status(200).json(data);            
+        }
+    });
+    
+});
+
+// CREATE
+router.post('/users/:userId/configs', function (req, res, next) {
+    console.log(req.body);
+    var userId = req.params.userId;
+    var config = req.body;
+    
+    User.findOne({id: userId}, function(err, user) {
+        if (err) {
+            res.status(500).json(err);                        
+        } else {
+            user.configs.push({ tags : config.tags, value : config.value });
+            user.save(function (err) {
+                if (err) {
+                    res.status(500).json(err);                        
+                } else {
+                    res.status(200).json('succeed in create user config:' + userId);
+                }
+            });
+        }
+    });
+});
+
+
+// UPDATE
+/* add tag */
+router.post('/users/:userId/configs/:configId/tags', function (req, res, next) {
+
+    console.log(req.body);
+    var userId = req.params.userId;
+    var configId = req.params.configId;
+    var config = req.body;
+
+    User.findOne({id: userId}, function(err, user){
+        if (err) {
+            res.status(500);
+        } else {
+            for (var i = 0; i < user.configs.length; i++) {
+                if (user.configs[i]._id == configId) {
+                    user.configs[i].tags.push(config.tags);
+                }                
+            }
+            user.save(function (err) {
+                if (err) {
+                    res.status(500).json(err);                        
+                } else {
+                    res.status(200).json('succeed in udpate user:' + userId + ' config');                    
+                }            
+            });
+        }
+    });      
+});
+
+/* change value */
+router.post('/users/:userId/configs/:configId/value', function (req, res, next) {
+
+    console.log(req.body);
+    var userId = req.params.userId;
+    var configId = req.params.configId;
+    var config = req.body;
+
+    User.findOne({id: userId}, function(err, user){
+        if (err) {
+            res.status(500);
+        } else {
+            for (var i = 0; i < user.configs.length; i++) {
+                if (user.configs[i]._id == configId) {
+                    user.configs[i].value = config.value;
+                }                
+            }
+            user.save(function (err) {
+                if (err) {
+                    res.status(500).json(err);                        
+                } else {
+                    res.status(200).json('succeed in udpate user:' + userId + ' config');                    
+                }            
+            });
+        }
+    });      
+});  
+
+
+// DELETE
+// TODO
+/* config delete */
+router.delete('/users/:userId/configs/:configId', function (req, res, next) {
+
+    var userId = req.params.id;
+    var configId = req.params.configId;
+    
+    User.remove({id: userId, 'configs._id': configId}, function(err) {
+        if (err) {
+            res.status(500).json(err);                       
+        } else {
+            res.status(200).json('succeed in delete user config:' + userId);
+        }
+    });
+    
+});
+
+/* tag delete */
+
+
 
 // Forbidden
 router.get('*', function(req, res){

@@ -159,12 +159,34 @@ function promotion (grade) {
 //===================== CONFIG ==========================
 
 // GET
+/* ALL */
 router.get('/users/:userId/configs', function (req, res, next) {
     User.findOne({id: req.params.userId}, {configs: true}, function(err, data) {
         if (err) {
             res.status(500).json(err);            
         } else {
             res.status(200).json(data);            
+        }
+    });
+    
+});
+/* タグ検索 */
+router.get('/users/:userId/configs/search/:tag', function (req, res, next) {
+
+    var userId = req.params.userId;
+    var tag = req.params.tag;    
+    var value = [];
+    
+    User.findOne({id: req.params.userId}, {configs: true}, function(err, user) {
+        if (err) {
+            res.status(500).json(err);            
+        } else {
+            for (var i = 0; i < user.configs.length; i++) {
+                for (var j = 0; j < user.configs[i].tags.length; j++) {
+                    if (user.configs[i].tags[j] === tag) value.push(user.configs[i].value);
+                }
+            }            
+            res.status(200).json(value);            
         }
     });
     

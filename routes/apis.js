@@ -9,6 +9,7 @@ var router = express.Router();
 var User = require('../models/user').User;
 var config = require('../config');
 
+
 //===================== USER ==========================
 // GET
 /* List */
@@ -92,6 +93,20 @@ router.delete('/users/:id', function(req, res, next) {
 
 
 // Others
+/* 学生からランダムに一人取り出す */
+router.get('/users/students/random', function (req, res, next) {
+
+    var filter = { group: { $in : config.student }};
+    var fields = { last_name:1, first_name:1, nick_name:1 };
+    User.findOneRandom(filter, fields, function(err, user) {
+        if (err) {
+            res.status(500);
+        } else {
+            res.status(200).json(user);
+        }        
+    });
+});
+
 /* 卒業 */
 router.get('/graduate/:id', function (req, res, next) {
     var userId = req.params.id;

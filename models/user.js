@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var uniqueValidator = require('mongoose-unique-validator');
+var random = require('mongoose-simple-random');
 
 var ConfigSchema = new mongoose.Schema({
     tags   : [String],
@@ -25,6 +26,7 @@ var UserSchema = new mongoose.Schema({
     configs:    [ConfigSchema]
 });
 UserSchema.plugin(uniqueValidator, {message: '既に登録されているユーザです'});
+UserSchema.plugin(random);
 
 module.exports.User = mongoose.model('User', UserSchema);
 

@@ -44,6 +44,9 @@ npm run foreve-stop $pid
 ```
 
 ## API Document
-  * [apiary.io](http://docs.usermanageservice.apiary.io)
+* 学生からランダムで一人取得
+  * apis/users/students/random
+
+* [apiary.io](http://docs.usermanageservice.apiary.io)
 
 

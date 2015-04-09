@@ -341,7 +341,7 @@ router.post('/users/:userId/configs/:configId/value', function (req, res, next) 
 
 // DELETE
 /* config delete */
-router.delete('/users/:userId/configs/:configId', function (req, res, next) {
+router.get('/users/:userId/configs/:configId/delete', function (req, res, next) {
 
     var userId = req.params.userId;
     var configId = req.params.configId;

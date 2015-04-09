@@ -108,15 +108,15 @@
 						<select name="group" class="form-control">
 							<option value="" disabled selected><%= @user.group %></option>
 							<option value="Staff">Staff</option>
-							<option value="D3">D3</option>							
+							<option value="D3">D3</option>
 							<option value="D2">D2</option>
 							<option value="D1">D1</option>
 							<option value="M2">M2</option>
 							<option value="M1">M1</option>
 							<option value="B4">B4</option>
-							<option value="Others">Others</option>																																										
+							<option value="Others">Others</option>
 						</select>
-						<button type="submit" class="btn btn-default">Update</button>						
+						<button type="submit" class="btn btn-default">Update</button>
 					</form>
 				</td>
 
@@ -196,25 +196,32 @@
 		</table>
 
 		<h2>Configs</h2>
-		<table class="table table-bordered table-hover">
+		<table class="table table-bordered table-hover" style="width: 100%; table-layout: fixed; word-wrap: break-word;">
 			<tr>
 				<th>tags</th>
-				<th>values</th>				
+				<th>values</th>
 			</tr>
-			<% for config in @user.configs : %>			
+			<% for config in @user.configs : %>
 			<tr>
-				<td>
-					<% for tag in config.tags : %>			
-					<p><%= tag %></p>
-					<% end %>
-					<form action="/apis/users/<%= @user.id %>/configs/<%= config._id %>/tags" method="post" class="form-inline">
-						<div class="form-group">
-							<input type="text" class="form-control" name="tags">
-						</div>
-						<button type="submit" class="btn btn-default">Update</button>
-					</form>
+				<td class="col-xs-6">
+					<ul class="nav nav-pills" role="tablist">
+						<% for tag in config.tags : %>
+						<button configId="<%= config._id %>" class="btn btn-primary tag-button" type="button">
+							<%= tag %>
+							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+						</button>
+						<% end %>
+					</ul>
+					<div>
+						<form action="/apis/users/<%= @user.id %>/configs/<%= config._id %>/tags" method="post" class="form-inline">
+							<div class="form-group">
+								<input type="text" class="form-control" name="tags">
+							</div>
+							<button type="submit" class="btn btn-default">Add</button>
+						</form>
+					</div>
 				</td>
-				<td>
+				<td class="col-xs-6">
 					<form action="/apis/users/<%= @user.id %>/configs/<%= config._id %>/value" method="post" class="form-inline">
 						<div class="form-group">
 							<input type="text" class="form-control" name="value" value="<%= config.value %>">
@@ -231,7 +238,7 @@
 		</form>
 		<form action="/graduate/<%= @user.id %>" method="GET">
 			<button type="submit" class="ghost_button"><h4>卒業</h4></button>
-		</form>		
+		</form>
 		<form action="/users/delete/<%= @user.id %>" method="GET">
 			<button type="submit" class="ghost_button"><h4>DELETE</h4></button>
 		</form>

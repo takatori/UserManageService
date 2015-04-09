@@ -289,24 +289,62 @@ router.post('/users/:userId/configs/:configId/value', function (req, res, next) 
 
 
 // DELETE
-// TODO
 /* config delete */
 router.delete('/users/:userId/configs/:configId', function (req, res, next) {
 
-    var userId = req.params.id;
+    var userId = req.params.userId;
     var configId = req.params.configId;
     
-    User.remove({id: userId, 'configs._id': configId}, function(err) {
+    User.findOne({id: userId}, function(err, user) {
         if (err) {
             res.status(500).json(err);                       
         } else {
-            res.status(200).json('succeed in delete user config:' + userId);
+            for (var i = 0, l = user.configs.length; i < l; i++) {
+                if (user.configs[i]._id == configId) {
+                    user.configs[i].remove();
+                }
+            }
+            user.save(function (err) {
+                if (err) {
+                    res.status(500).json(err);                        
+                } else {
+                    res.status(200).json('succeed in delete user config:' + userId);                                
+                }            
+            });            
         }
     });
     
 });
 
 /* tag delete */
+router.delete('/users/:userId/configs/:configId/tags/:tagName', function (req, res, next) {
+
+    var userId = req.params.userId;
+    var configId = req.params.configId;
+    var tagName = req.params.tagName;
+
+    User.findOne({id: userId}, function(err, user) {
+        if (err || user == null) {
+            res.status(500).json(err);                       
+        } else {
+            for (var i = 0; i < user.configs.length; i++) {
+                if (user.configs[i]._id == configId) {
+                    // 配列から特定要素を削除
+                    user.configs[i].tags = user.configs[i].tags.filter(function(v, i) {
+                        return (v !== tagName);
+                    });                    
+                }
+            }
+            user.save(function (err) {
+                if (err) {
+                    res.status(500).json(err);                        
+                } else {
+                    res.status(200).json('succeed in delete user config:' + userId);                                
+                }            
+            });
+        }
+    });
+});
 
 
 

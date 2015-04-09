@@ -206,9 +206,8 @@
 				<td class="col-xs-6">
 					<ul class="nav nav-pills" role="tablist">
 						<% for tag in config.tags : %>
-						<button configId="<%= config._id %>" class="btn btn-primary tag-button" type="button">
+						<button userId="<%= @user.id %>" configId="<%= config._id %>" class="btn btn-primary tag-button" type="button">
 							<%= tag %>
-							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 						</button>
 						<% end %>
 					</ul>

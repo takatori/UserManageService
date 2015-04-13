@@ -185,27 +185,35 @@ router.get('/users/:userId/configs', function (req, res, next) {
     });
     
 });
-/* タグ検索 */
-router.get('/users/:userId/configs/search/:tag', function (req, res, next) {
 
-    var userId = req.params.userId;
-    var tag = req.params.tag;    
-    var value = [];
+/* タグ検索 */
+router.post('/users/:userId/configs/search', function (req, res, next) {
+
+    var userId  = req.params.userId;
+    var queries = req.body.tags;    
+    var value   = [];
     
     User.findOne({id: req.params.userId}, {configs: true}, function(err, user) {
         if (err) {
             res.status(500).json(err);            
         } else {
             for (var i = 0; i < user.configs.length; i++) {
-                for (var j = 0; j < user.configs[i].tags.length; j++) {
-                    if (user.configs[i].tags[j] === tag) value.push(user.configs[i].value);
+                if (isContainAllQueries(user.configs[i].tags, queries)) {
+                    value.push(user.configs[i].value);                    
                 }
-            }            
+            }
             res.status(200).json(value);            
         }
     });
-    
 });
+
+// tagの中にqueriesの要素がすべてあればtrue,なければfalseを返す
+function isContainAllQueries (tags, queries) {
+    for (i = 0; i < queries.length; i++) {
+        if (tags.indexOf(queries[i].toString()) < 0) return false;
+    }
+    return true;
+}
 
 // CREATE
 router.post('/users/:userId/configs', function (req, res, next) {

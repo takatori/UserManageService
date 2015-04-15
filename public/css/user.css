@@ -6,3 +6,13 @@ table {
     text-align: center;
 }
 
+form > .update-button {
+    float: left;
+}
+
+.tags {
+    margin: 5px 0px;
+}
+.tags  button {
+    margin: 5px;
+}

@@ -6,11 +6,13 @@
     $('.tag-button').hover(
         // マウスが乗った時
         function () {
-        	$(this).append('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>');
+            $(this).removeClass('btn-primary');
+            $(this).addClass('btn-danger');                        
         },
         // マウスがはずれた時
         function () {
-        	$(this).find('span:last').remove();
+            $(this).addClass('btn-primary');
+            $(this).removeClass('btn-danger');                                    
         });
 
     $('.tag-button').click(

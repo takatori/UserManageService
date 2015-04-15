@@ -1,0 +1,26 @@
+.index-wrapper {
+    position: absolute;
+    min-height: 100%;
+    min-width: 100%;            
+    background-image: url("/img/bg.jpg");
+    background-position:80% 40% ;    
+}
+
+.inner-cover {
+	position:relative; /* 絶対配置の基準点 */
+	width:100%; /* 600px以下は幅いっぱいに広げる */
+	max-width:600px; /* 最大幅の指定 */
+	height:500px; /* 高さの指定 */
+	margin:0 auto; /* ブロック要素の中央揃え */
+	text-align:center; /* インライン要素の中央揃え */
+}
+
+.inner {
+    position:absolute; /* 絶対配置 */
+    top:50%; /* 上から半分 */
+    left:50%; /* 左から半分 */
+    width:100%; /* 大枠と同じ幅に */
+    /* 要素の大きさの半分引く（CSS3） */
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}

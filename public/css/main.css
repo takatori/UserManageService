@@ -1,9 +1,23 @@
-body {
-
+html,body {
+    height: 100%;
 }
 
-.site-wrapper-inner {
-    margin: 5%;
+.site-wrapper {
+    width: 100%;
+    position: relative;
+    min-height: 100%;    
+}
+
+#contents {
+    padding-bottom:100px; /*フッターの高さと同じ*/   
+}
+
+footer {
+    width: 100%;    
+    height:100px;
+    position:absolute;
+    bottom:0;
+    background: #212124;
 }
 
 /* Ghost button */
@@ -19,6 +33,11 @@ body {
   font-family: Helvetica, Arial, sans-serif;
 }
 .ghost_button:hover{
-  color: #333;
-  background: red;
+    color: #333;
+    background: #fff;
+    text-decoration: none;    
+}
+
+.logo{
+    margin-top: -22px;
 }

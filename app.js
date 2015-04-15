@@ -10,14 +10,13 @@ var mongoose     = require('mongoose');
 var session      = require('express-session');
 var MongoStore   = require('connect-mongo')(session);
 
-// ******************* Service  ***************************************
+// ******************* Service Setting ***************************************
 var config = require('./config');
 var routes = require('./routes/index');
 var apis   = require('./routes/apis');
 
-
-var app = express();
-var port = process.env.PORT || 3000;
+var app    = express();
+var port   = process.env.PORT || 3001;
 
 // ******************* View Setting ***************************************
 // view engine setup
@@ -55,6 +54,11 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(cookieParser());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 // ******************* Session Setting ***************************************
 app.use(session({

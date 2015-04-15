@@ -8,6 +8,7 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/user').User;
 var config = require('../config');
+var fs = require('fs');
 
 
 //===================== USER ==========================
@@ -46,6 +47,32 @@ router.get('/users/:id', function(req, res) {
         }
     });
 });
+
+// // 画像だけ取り出す
+// router.get('/users/:id/img', function(req, res) {
+//     User.findOne({id: req.params.id}, {icon_img: true}, function(err, data) {
+//         if (err) {
+//             res.status(500).json(err);            
+//         } else {
+//             // res.status(200).json(data.icon_img);
+//             // convert base64 string back to image 
+//             base64_decode(data.icon_img.split(',')[1], 'copy.jpg');
+//             //var buf = new Buffer(data.icon_img, 'base64');
+//             var buf = fs.readFileSync('copy.jpg');            
+//             res.sendfile(buf, { 'Content-Type': 'image/jpeg' }, 200);            
+//         }
+//     });
+// });
+
+// // function to create file from base64 encoded string
+// function base64_decode(base64str, file) {
+//     // create buffer object from base64 encoded string, it is important to tell the constructor that the string is base64 encoded
+//     var bitmap = new Buffer(base64str, 'base64');
+//     // write buffer to file
+//     fs.writeFileSync(file, bitmap);
+//     console.log('******** File created from base64 encoded string ********');
+// }
+
 
 // CREATE
 router.post('/users', function(req, res, next) {

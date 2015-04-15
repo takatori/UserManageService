@@ -1,285 +1,288 @@
 <% extend 'layout' %>
 
-<div class="inner-content">
-	<div class="page-header">
-		<h1><%= @user.id %></h1>
-	</div>
-	<div class="contents-list">
-		<table class="table table-bordered table-hover">
-			<tr>
-				<th>KEY</th>
-				<th>VALUE</th>
-			</tr>
-			<tr>
-				<td>ID</td>
-				<td>
-					<form action="/users/<%= @user.id %>" method="post" class="form-inline">
-						<div class="form-group">
-							<input type="id" class="form-control" name="id" value="<%= @user.id %>" disabled>
-						</div>
-					</form>
-				</td>
-			</tr>
-			<tr>
-				<td>PASSWORD</td>
-				<td>
-					<form action="/users/<%= @user.id %>" method="post" class="form-inline">
-						<div class="form-group">
-							<input type="password" class="form-control" name="password" value="<%= @user.password %>" required>
-						</div>
-						<button type="submit" class="btn btn-default">Update</button>
-					</form>
-				</td>
-			</tr>
-			<tr>
-				<td>学籍番号</td>
-				<td>
-					<form action="/users/<%= @user.id %>" method="post" class="form-inline">
-						<div class="form-group">
-							<input type="text" class="form-control" name="stu_id" value="<%= @user.stu_id %>">
-						</div>
-						<button type="submit" class="btn btn-default">Update</button>
-					</form>
-				</td>
-			</tr>
-			<tr>
-				<td>姓</td>
-				<td>
-					<form action="/users/<%= @user.id %>" method="post" class="form-inline">
-						<div class="form-group">
-							<input type="text" class="form-control" name="last_name" value="<%= @user.last_name %>" required>
-						</div>
-						<button type="submit" class="btn btn-default">Update</button>
-					</form>
-				</td>
-			</tr>
-			<tr>
-				<td>名</td>
-				<td>
-					<form action="/users/<%= @user.id %>" method="post" class="form-inline">
-						<div class="form-group">
-							<input type="text" class="form-control" name="first_name" value="<%= @user.first_name %>" required>
-						</div>
-						<button type="submit" class="btn btn-default">Update</button>
-					</form>
-				</td>
-			</tr>
-			<tr>
-				<td>ニックネーム</td>
-				<td>
-					<form action="/users/<%= @user.id %>" method="post" class="form-inline">
-						<div class="form-group">
-							<input type="text" class="form-control" name="nick_name" value="<%= @user.nick_name %>" required>
-						</div>
-						<button type="submit" class="btn btn-default">Update</button>
-					</form>
-				</td>
-			</tr>
-			<tr>
-				<td>性別</td>
-				<td>
-					<form action="/users/<%= @user.id %>" method="post" class="form-inline">
-						<% if @user.sex is 'male' : %>
-						<label class="radio-inline"><input type="radio" name="sex" id="sex_male" value="male" checked="checked">男性</label>
-						<label class="radio-inline"><input type="radio" name="sex" id="sex_female" value="female">女性</label>
-						<% else : %>
-						<label class="radio-inline"><input type="radio" name="sex" id="sex_male" value="male">男性</label>
-						<label class="radio-inline"><input type="radio" name="sex" id="sex_female" value="female" checked="checked">女性</label>
-						<% end %>
-						<button type="submit" class="btn btn-default">Update</button>
-					</form>
-				</td>
-			</tr>
-			<tr>
-				<td>生年月日</td>
-				<td>
-					<form action="/users/<%= @user.id %>" method="post" class="form-inline">
-						<div class="form-group">
-							<input type="date" class="form-control" name="birthday" value="<%= @user.birthday %>">
-						</div>
-						<button type="submit" class="btn btn-default">Update</button>
-					</form>
-				</td>
-			</tr>
-			<tr>
-				<td>学年</td>
-				<td>
-					<form id="state_form" action="/users/<%= @user.id %>" method="post" class="form-inline">
-						<select name="group" class="form-control">
-							<option value="" disabled selected><%= @user.group %></option>
-							<option value="Staff">Staff</option>
-							<option value="D3">D3</option>
-							<option value="D2">D2</option>
-							<option value="D1">D1</option>
-							<option value="M2">M2</option>
-							<option value="M1">M1</option>
-							<option value="B4">B4</option>
-							<option value="Others">Others</option>
-						</select>
-						<button type="submit" class="btn btn-default">Update</button>
-					</form>
-				</td>
-
-			</tr>
-			<tr>
-				<td>電話番号</td>
-				<td>
-					<form action="/users/<%= @user.id %>" method="post" class="form-inline">
-						<div class="form-group">
-							<input type="text" class="form-control" name="tel" value="<%= @user.tel %>">
-						</div>
-						<button type="submit" class="btn btn-default">Update</button>
-					</form>
-				</td>
-			</tr>
-			<tr>
-				<td>携帯電話</td>
-				<td>
-					<form action="/users/<%= @user.id %>" method="post" class="form-inline">
-						<div class="form-group">
-							<input type="text" class="form-control" name="mobile_tel" value="<%= @user.mobile_tel %>" placeholder="1111-2222-3333" >
-						</div>
-						<button type="submit" class="btn btn-default">Update</button>
-					</form>
-				</td>
-			</tr>
-			<tr>
-				<td>メールアドレス</td>
-				<td>
-					<form action="/users/<%= @user.id %>" method="post" class="form-inline">
-						<div class="form-group">
-							<input type="email" class="form-control" name="email" value="<%= @user.email %>">
-						</div>
-						<button type="submit" class="btn btn-default">Update</button>
-					</form>
-				</td>
-			</tr>
-			<tr>
-				<td>現住所</td>
-				<td>
-					<form action="/users/<%= @user.id %>" method="post" class="form-inline">
-						<div class="form-group">
-							<input type="text" class="form-control" name="addr" value="<%= @user.addr %>">
-						</div>
-						<button type="submit" class="btn btn-default">Update</button>
-					</form>
-				</td>
-			</tr>
-			<tr>
-				<td>実家住所</td>
-				<td>
-					<form action="/users/<%= @user.id %>" method="post" class="form-inline">
-						<div class="form-group">
-							<input type="text" class="form-control" name="home_addr" value="<%= @user.home_addr %>">
-						</div>
-						<button type="submit" class="btn btn-default">Update</button>
-					</form>
-				</td>
-			</tr>
-			<tr>
-				<td>アイコン画像</td>
-				<td>
-					<% if @user.icon_img : %>
-					<img id="image-preview" class="media-object" src="<%= @user.icon_img %>" style="width: 128px; height: 128px;">
-					<% else : %>
-					<img id="image-preview" class="media-object" src="/img/no.png" style="width: 128px; height: 128px;">
-					<% end %>
-					<form action="/users/<%= @user.id %>" method="post" class="form-inline">
-						<div class="form-group">
-							<input id="img-file-selector" type='file' accept="image/jpeg, image/png" class='form-control'>
-							<input id="base64-icon-img" type='text' name="icon_img" class='form-control hidden'>
-						</div>
-						<button type="submit" class="btn btn-default">Update</button>
-					</form>
-				</td>
-			</tr>
-		</table>
-
-		<h2>Configs</h2>
-		<!-- Button trigger modal -->
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-			Add Config
-		</button>
-		<table class="table table-bordered table-hover" style="width: 100%; table-layout: fixed; word-wrap: break-word;">
-			<tr>
-				<th>tags</th>
-				<th>values</th>
-				<th></th>
-			</tr>
-			<% for config in @user.configs : %>
-			<tr>
-				<td class="col-xs-4">
-					<ul class="nav nav-pills" role="tablist">
-						<% for tag in config.tags : %>
-						<button userId="<%= @user.id %>" configId="<%= config._id %>" class="btn btn-primary tag-button" type="button">
-							<%= tag %>
-						</button>
-						<% end %>
-					</ul>
-					<div>
-						<form action="/users/<%= @user.id %>/configs/<%= config._id %>/tags" method="post" class="form-inline">
+<div class="user-wrapper">
+	<div class="user-cover">
+		
+		<div class="page-header">
+			<h1><%= @user.id %></h1>
+		</div>
+		<div class="contents-list">
+			<table class="table table-bordered table-hover">
+				<tr>
+					<th>KEY</th>
+					<th>VALUE</th>
+				</tr>
+				<tr>
+					<td>ID</td>
+					<td>
+						<form action="/users/<%= @user.id %>" method="post" class="form-inline">
 							<div class="form-group">
-								<input type="text" class="form-control" name="tags">
+								<input type="id" class="form-control" name="id" value="<%= @user.id %>" disabled>
 							</div>
-							<button type="submit" class="btn btn-default">Add</button>
 						</form>
-					</div>
-				</td>
-				<td class="col-xs-8">
-					<form action="/users/<%= @user.id %>/configs/<%= config._id %>/value" method="post" class="form-inline">
-						<div class="form-group">
-							<textarea class="form-control" rows="3" name="value"><%= config.value %></textarea>
-						</div>
-						<button type="submit" class="btn btn-default">Update</button>
-					</form>
-				</td>
-				<td>
-					<form action="/users/<%= @user.id %>/configs/<%= config._id %>/delete" method="get" class="form-inline">
-						<button type="submit" class="btn btn-danger">Delete</button>
-					</form>					
-				</td>
-			</tr>
-			<% end %>
-		</table>
+					</td>
+				</tr>
+				<tr>
+					<td>PASSWORD</td>
+					<td>
+						<form action="/users/<%= @user.id %>" method="post" class="form-inline">
+							<div class="form-group">
+								<input type="password" class="form-control" name="password" value="<%= @user.password %>" required>
+							</div>
+							<button type="submit" class="btn btn-default">Update</button>
+						</form>
+					</td>
+				</tr>
+				<tr>
+					<td>学籍番号</td>
+					<td>
+						<form action="/users/<%= @user.id %>" method="post" class="form-inline">
+							<div class="form-group">
+								<input type="text" class="form-control" name="stu_id" value="<%= @user.stu_id %>">
+							</div>
+							<button type="submit" class="btn btn-default">Update</button>
+						</form>
+					</td>
+				</tr>
+				<tr>
+					<td>姓</td>
+					<td>
+						<form action="/users/<%= @user.id %>" method="post" class="form-inline">
+							<div class="form-group">
+								<input type="text" class="form-control" name="last_name" value="<%= @user.last_name %>" required>
+							</div>
+							<button type="submit" class="btn btn-default">Update</button>
+						</form>
+					</td>
+				</tr>
+				<tr>
+					<td>名</td>
+					<td>
+						<form action="/users/<%= @user.id %>" method="post" class="form-inline">
+							<div class="form-group">
+								<input type="text" class="form-control" name="first_name" value="<%= @user.first_name %>" required>
+							</div>
+							<button type="submit" class="btn btn-default">Update</button>
+						</form>
+					</td>
+				</tr>
+				<tr>
+					<td>ニックネーム</td>
+					<td>
+						<form action="/users/<%= @user.id %>" method="post" class="form-inline">
+							<div class="form-group">
+								<input type="text" class="form-control" name="nick_name" value="<%= @user.nick_name %>" required>
+							</div>
+							<button type="submit" class="btn btn-default">Update</button>
+						</form>
+					</td>
+				</tr>
+				<tr>
+					<td>性別</td>
+					<td>
+						<form action="/users/<%= @user.id %>" method="post" class="form-inline">
+							<% if @user.sex is 'male' : %>
+							<label class="radio-inline"><input type="radio" name="sex" id="sex_male" value="male" checked="checked">男性</label>
+							<label class="radio-inline"><input type="radio" name="sex" id="sex_female" value="female">女性</label>
+							<% else : %>
+							<label class="radio-inline"><input type="radio" name="sex" id="sex_male" value="male">男性</label>
+							<label class="radio-inline"><input type="radio" name="sex" id="sex_female" value="female" checked="checked">女性</label>
+							<% end %>
+							<button type="submit" class="btn btn-default">Update</button>
+						</form>
+					</td>
+				</tr>
+				<tr>
+					<td>生年月日</td>
+					<td>
+						<form action="/users/<%= @user.id %>" method="post" class="form-inline">
+							<div class="form-group">
+								<input type="date" class="form-control" name="birthday" value="<%= @user.birthday %>">
+							</div>
+							<button type="submit" class="btn btn-default">Update</button>
+						</form>
+					</td>
+				</tr>
+				<tr>
+					<td>学年</td>
+					<td>
+						<form id="state_form" action="/users/<%= @user.id %>" method="post" class="form-inline">
+							<select name="group" class="form-control">
+								<option value="" disabled selected><%= @user.group %></option>
+								<option value="Staff">Staff</option>
+								<option value="D3">D3</option>
+								<option value="D2">D2</option>
+								<option value="D1">D1</option>
+								<option value="M2">M2</option>
+								<option value="M1">M1</option>
+								<option value="B4">B4</option>
+								<option value="Others">Others</option>
+							</select>
+							<button type="submit" class="btn btn-default">Update</button>
+						</form>
+					</td>
 
-		<form action="/promotion/<%= @user.id %>" method="GET">
-			<button type="submit" class="ghost_button"><h4>進級</h4></button>
-		</form>
-		<form action="/graduate/<%= @user.id %>" method="GET">
-			<button type="submit" class="ghost_button"><h4>卒業</h4></button>
-		</form>
-		<form action="/users/delete/<%= @user.id %>" method="GET">
-			<button type="submit" class="ghost_button"><h4>DELETE</h4></button>
-		</form>
+				</tr>
+				<tr>
+					<td>電話番号</td>
+					<td>
+						<form action="/users/<%= @user.id %>" method="post" class="form-inline">
+							<div class="form-group">
+								<input type="text" class="form-control" name="tel" value="<%= @user.tel %>">
+							</div>
+							<button type="submit" class="btn btn-default">Update</button>
+						</form>
+					</td>
+				</tr>
+				<tr>
+					<td>携帯電話</td>
+					<td>
+						<form action="/users/<%= @user.id %>" method="post" class="form-inline">
+							<div class="form-group">
+								<input type="text" class="form-control" name="mobile_tel" value="<%= @user.mobile_tel %>" placeholder="1111-2222-3333" >
+							</div>
+							<button type="submit" class="btn btn-default">Update</button>
+						</form>
+					</td>
+				</tr>
+				<tr>
+					<td>メールアドレス</td>
+					<td>
+						<form action="/users/<%= @user.id %>" method="post" class="form-inline">
+							<div class="form-group">
+								<input type="email" class="form-control" name="email" value="<%= @user.email %>">
+							</div>
+							<button type="submit" class="btn btn-default">Update</button>
+						</form>
+					</td>
+				</tr>
+				<tr>
+					<td>現住所</td>
+					<td>
+						<form action="/users/<%= @user.id %>" method="post" class="form-inline">
+							<div class="form-group">
+								<input type="text" class="form-control" name="addr" value="<%= @user.addr %>">
+							</div>
+							<button type="submit" class="btn btn-default">Update</button>
+						</form>
+					</td>
+				</tr>
+				<tr>
+					<td>実家住所</td>
+					<td>
+						<form action="/users/<%= @user.id %>" method="post" class="form-inline">
+							<div class="form-group">
+								<input type="text" class="form-control" name="home_addr" value="<%= @user.home_addr %>">
+							</div>
+							<button type="submit" class="btn btn-default">Update</button>
+						</form>
+					</td>
+				</tr>
+				<tr>
+					<td>アイコン画像</td>
+					<td>
+						<% if @user.icon_img : %>
+						<img id="image-preview" class="media-object" src="<%= @user.icon_img %>" style="width: 128px; height: 128px;">
+						<% else : %>
+						<img id="image-preview" class="media-object" src="/img/no.png" style="width: 128px; height: 128px;">
+						<% end %>
+						<form action="/users/<%= @user.id %>" method="post" class="form-inline">
+							<div class="form-group">
+								<input id="img-file-selector" type='file' accept="image/jpeg, image/png" class='form-control'>
+								<input id="base64-icon-img" type='text' name="icon_img" class='form-control hidden'>
+							</div>
+							<button type="submit" class="btn btn-default">Update</button>
+						</form>
+					</td>
+				</tr>
+			</table>
+
+			<h2>Configs</h2>
+			<!-- Button trigger modal -->
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+				Add Config
+			</button>
+			<table class="table table-bordered table-hover" style="width: 100%; table-layout: fixed; word-wrap: break-word;">
+				<tr>
+					<th>tags</th>
+					<th>values</th>
+					<th></th>
+				</tr>
+				<% for config in @user.configs : %>
+				<tr>
+					<td class="col-xs-4">
+						<ul class="nav nav-pills" role="tablist">
+							<% for tag in config.tags : %>
+							<button userId="<%= @user.id %>" configId="<%= config._id %>" class="btn btn-primary tag-button" type="button">
+								<%= tag %>
+							</button>
+							<% end %>
+						</ul>
+						<div>
+							<form action="/users/<%= @user.id %>/configs/<%= config._id %>/tags" method="post" class="form-inline">
+								<div class="form-group">
+									<input type="text" class="form-control" name="tags">
+								</div>
+								<button type="submit" class="btn btn-default">Add</button>
+							</form>
+						</div>
+					</td>
+					<td class="col-xs-8">
+						<form action="/users/<%= @user.id %>/configs/<%= config._id %>/value" method="post" class="form-inline">
+							<div class="form-group">
+								<textarea class="form-control" rows="3" name="value"><%= config.value %></textarea>
+							</div>
+							<button type="submit" class="btn btn-default">Update</button>
+						</form>
+					</td>
+					<td>
+						<form action="/users/<%= @user.id %>/configs/<%= config._id %>/delete" method="get" class="form-inline">
+							<button type="submit" class="btn btn-danger">Delete</button>
+						</form>
+					</td>
+				</tr>
+				<% end %>
+			</table>
+
+			<form action="/promotion/<%= @user.id %>" method="GET">
+				<button type="submit" class="ghost_button"><h4>進級</h4></button>
+			</form>
+			<form action="/graduate/<%= @user.id %>" method="GET">
+				<button type="submit" class="ghost_button"><h4>卒業</h4></button>
+			</form>
+			<form action="/users/delete/<%= @user.id %>" method="GET">
+				<button type="submit" class="ghost_button"><h4>DELETE</h4></button>
+			</form>
+		</div>
 	</div>
-</div>
 
 
 
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Add Config</h4>
-			</div>
-			<div class="modal-body">
-				<form action="/users/<%= @user.id %>/configs"  method="post" class="form-horizontal">					
-					<div class="form-group">
-						<label for="id" class="col-sm-2 control-label">TAG</label>
-						<div class="col-sm-6">
-							<input type="text" name="tags" placeholder="tag" class="form-control" required/>
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Add Config</h4>
+				</div>
+				<div class="modal-body">
+					<form action="/users/<%= @user.id %>/configs"  method="post" class="form-horizontal">
+						<div class="form-group">
+							<label for="id" class="col-sm-2 control-label">TAG</label>
+							<div class="col-sm-6">
+								<input type="text" name="tags" placeholder="tag" class="form-control" required/>
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label for="password" class="col-sm-2 control-label">VALUE</label>
-						<div class="col-sm-6">
-							<input type="text" name="value" placeholder="value" class="form-control"/>
+						<div class="form-group">
+							<label for="password" class="col-sm-2 control-label">VALUE</label>
+							<div class="col-sm-6">
+								<input type="text" name="value" placeholder="value" class="form-control"/>
+							</div>
 						</div>
-					</div>
-				<button type="Submit" class="btn btn-primary">Save changes</button>					
-				</form>
+						<button type="Submit" class="btn btn-primary">Save changes</button>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>

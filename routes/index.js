@@ -40,7 +40,7 @@ router.get('/login', function(req, res){
             res.render('login', { errors: "パスワードが間違っているかアカウントが存在しません" });            
         } else {
             req.session.user = id;
-            res.redirect('/');
+            res.redirect('/users');
         }
     });
 });
@@ -116,14 +116,8 @@ router.post('/register/confirm', function(req, res, next) {
         } else {
             //req.session.name = req.body.name;
             //req.session.email = req.body.email;
-            res.redirect('/register/complete');
+            res.redirect('/users');
         }
-    });
-});
-
-router.get('/register/complete', function(req, res, next) {
-    res.render('register/complete', {
-        title: 'ユーザ登録完了'
     });
 });
 

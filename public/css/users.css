@@ -1,3 +1,10 @@
+.user-list-cover {
+    margin: 5%;
+}
+
+.user-list {
+    margin: 10px 0px;
+}
 figure {
 	position: relative;
 	overflow: hidden;

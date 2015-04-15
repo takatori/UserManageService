@@ -1,38 +1,40 @@
 <% extend 'layout' %>
-<div class="inner-content">
-	<div class="page-header">
-		<h2>Members</h2>
-	</div>
-	
-	<ul class="nav nav-tabs">
-		<li role="presentation" class="active"><a href="/users?group=current">Current</a></li>
-		<li role="presentation"><a href="/users?group=Staff">Staff</a></li>
-		<li role="presentation"><a href="/users?group=D">D</a></li>
-		<li role="presentation"><a href="/users?group=M2">M2</a></li>
-		<li role="presentation"><a href="/users?group=M1">M1</a></li>
-		<li role="presentation"><a href="/users?group=B4">B4</a></li>
-		<li role="presentation"><a href="/users">All</a></li>
-	</ul>
-
-
-
-	<div class="row">
-		<% for user in @users : %>
-		<div class="col-xs-4 col-md-3">
-			<a href="/users/<%= user.id %>" class="thumbnail">
-				<figure>
-					<% if user.icon_img : %>
-					<img class="media-object" src="<%= user.icon_img %>">
-					<% else : %>
-					<img class="media-object" src="/img/no.png">
-					<% end %>
-					<figcaption>
-						<h3><%= user.id %></h3>
-						<p><%= user.group %></p>
-					</figcaption>
-				</figure>
-			</a>
+<div class="user-list-wrapper">
+	<div class="user-list-cover">
+		<div class="page-header">
+			<h2>Members</h2>
 		</div>
-		<% end %>
+
+		<ul class="nav nav-tabs">
+			<li id="nav-tab-all" role="presentation"><a href="/users">All</a></li>
+			<li id="nav-tab-current" role="presentation"><a href="/users?group=current">Current</a></li>
+			<li id="nav-tab-staff" role="presentation"><a href="/users?group=Staff">Staff</a></li>
+			<li id="nav-tab-d" role="presentation"><a href="/users?group=D">D</a></li>
+			<li id="nav-tab-m2" role="presentation"><a href="/users?group=M2">M2</a></li>
+			<li id="nav-tab-m1" role="presentation"><a href="/users?group=M1">M1</a></li>
+			<li id="nav-tab-b4" role="presentation"><a href="/users?group=B4">B4</a></li>
+		</ul>
+
+
+
+		<div class="row user-list">
+			<% for user in @users : %>
+			<div class="col-xs-4 col-md-3">
+				<a href="/users/<%= user.id %>" class="thumbnail">
+					<figure>
+						<% if user.icon_img : %>
+						<img class="media-object" src="<%= user.icon_img %>">
+						<% else : %>
+						<img class="media-object" src="/img/no.png">
+						<% end %>
+						<figcaption>
+							<h3><%= user.id %></h3>
+							<p><%= user.group %></p>
+						</figcaption>
+					</figure>
+				</a>
+			</div>
+			<% end %>
+		</div>
 	</div>
 </div>

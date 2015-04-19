@@ -35,6 +35,18 @@ router.get('/users/current', function(req, res, next) {
         }
     });
 });
+/** Current Nameだけ返す **/
+router.get('/users/current/name', function(req, res, next) {
+    var query = { group: { $in : config.current }};
+    var filter = { id: true, last_name:true, first_name:true};
+    User.find(query, filter, function(err, data) {
+        if (err) {
+            res.status(500).json(err);
+        } else {
+            res.status(200).json(data);
+        }
+    });
+});
 
 
 /* Unit */
@@ -47,31 +59,6 @@ router.get('/users/:id', function(req, res) {
         }
     });
 });
-
-// // 画像だけ取り出す
-// router.get('/users/:id/img', function(req, res) {
-//     User.findOne({id: req.params.id}, {icon_img: true}, function(err, data) {
-//         if (err) {
-//             res.status(500).json(err);            
-//         } else {
-//             // res.status(200).json(data.icon_img);
-//             // convert base64 string back to image 
-//             base64_decode(data.icon_img.split(',')[1], 'copy.jpg');
-//             //var buf = new Buffer(data.icon_img, 'base64');
-//             var buf = fs.readFileSync('copy.jpg');            
-//             res.sendfile(buf, { 'Content-Type': 'image/jpeg' }, 200);            
-//         }
-//     });
-// });
-
-// // function to create file from base64 encoded string
-// function base64_decode(base64str, file) {
-//     // create buffer object from base64 encoded string, it is important to tell the constructor that the string is base64 encoded
-//     var bitmap = new Buffer(base64str, 'base64');
-//     // write buffer to file
-//     fs.writeFileSync(file, bitmap);
-//     console.log('******** File created from base64 encoded string ********');
-// }
 
 
 // CREATE
@@ -219,10 +206,10 @@ router.post('/users/:userId/configs/search', function (req, res, next) {
     var userId  = req.params.userId;
     var queries = req.body.tags;    
     var value   = [];
-    
+
     User.findOne({id: req.params.userId}, {configs: true}, function(err, user) {
-        if (err) {
-            res.status(500).json(err);            
+        if (err || !user) {
+            res.status(500).json(err); 
         } else {
             for (var i = 0; i < user.configs.length; i++) {
                 if (isContainAllQueries(user.configs[i].tags, queries)) {

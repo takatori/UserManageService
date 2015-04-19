@@ -24,21 +24,22 @@ router.get('/users', function(req, res, next) {
         }
     });
 });
-/** Current **/
+
+/** Current filterをかけて欲しい部分だけ返す **/
 router.get('/users/current', function(req, res, next) {
+
     var query = { group: { $in : config.current }};
-    User.find(query, function(err, data) {
-        if (err) {
-            res.status(500).json(err);
-        } else {
-            res.status(200).json(data);
-        }
-    });
-});
-/** Current Nameだけ返す **/
-router.get('/users/current/name', function(req, res, next) {
-    var query = { group: { $in : config.current }};
-    var filter = { id: true, last_name:true, first_name:true};
+    var filter = {};
+
+    // filter作成
+    var fields = req.query.fields;
+    if (fields) {
+        fields = fields.split(',');
+        fields.forEach(function(f){
+            filter[f] = 'true';
+        });        
+    }
+    
     User.find(query, filter, function(err, data) {
         if (err) {
             res.status(500).json(err);

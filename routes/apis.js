@@ -1,7 +1,6 @@
 /*
- * APIs 
- * apiを提供する
- * レスポンスはJSONで返す
+ * @fileoverview メンバー情報管理システムAPI
+ * @author Satoshi Takatori
  */
 
 var express = require('express');
@@ -11,21 +10,26 @@ var config = require('../config');
 var fs = require('fs');
 
 
-//===================== USER ==========================
-// GET
-/* List */
-/** ALL **/
+/**
+ * 全ユーザの情報を返す
+ * @return{[User]}
+ */
 router.get('/users', function(req, res, next) {
-    User.find({}, function(err, data) {
-        if (err) {
-            res.status(500).json(err);
-        } else {
-            res.status(200).json(data);
-        }
-    });
+    fetchUserListPromise({}, {})
+        .then(function(users){
+            res.status(200).json(users);            
+        })
+        .catch(function(err){
+            res.status(500).json(err);            
+        });
 });
 
-/** Current filterをかけて欲しい部分だけ返す **/
+
+/**
+ * 現役のユーザーの情報で指定した属性のみを返す
+ * @param {String} filter 属性情報 ex: filter=first_name,last_name
+ * @return {[User]}
+ */
 router.get('/users/current', function(req, res, next) {
 
     var query = { group: { $in : config.current }};
@@ -40,128 +44,154 @@ router.get('/users/current', function(req, res, next) {
         });        
     }
     
-    User.find(query, filter, function(err, data) {
-        if (err) {
-            res.status(500).json(err);
-        } else {
-            res.status(200).json(data);
-        }
-    });
-});
-
-
-/* Unit */
-router.get('/users/:id', function(req, res) {
-    User.findOne({id: req.params.id}, function(err, data) {
-        if (err) {
+    fetchUserListPromise(query, filter)
+        .then(function(users){
+            res.status(200).json(users);            
+        })
+        .catch(function(err){
             res.status(500).json(err);            
-        } else {
-            res.status(200).json(data);            
-        }
-    });
+        });
 });
 
 
-// CREATE
+/**
+ * 指定されたidのユーザ情報を返す
+ * @param {String} id
+ * @return {Object} user ユーザ情報
+ */
+router.get('/users/:id', function(req, res) {
+
+    var query = {id: req.params.id};
+    fetchUserPromise(query,{})
+        .then(function(user){
+            res.status(200).json(user);                        
+        })
+        .catch(function(err){
+            res.status(500).json(err);                        
+        });
+});
+
+/**
+ * 新規ユーザを登録する
+ * @param {Object}  ユーザ情報
+ */
 router.post('/users', function(req, res, next) {
     console.log(req.body);
     var userData = req.body;
-    User.create(userData, function(err){
-        if (err) {
-            res.status(500).json(err);            
-        } else {
-            res.status(200).json('succeed in create user:' + userData);            
-        }
-    });
+
+    createUserPromise(userData)
+        .then(function(){
+            res.status(200).json('succeed in create user');                        
+        })
+        .catch(function(err){
+            res.status(500).json(err);                        
+        });
 });
 
 
-// UPDATE
+/**
+ * ユーザ情報を更新する
+ * @param {String} id
+ * @param {Object} ユーザ情報
+ */
 router.post('/users/:id', function(req, res, next) {
     console.log(req.body);
     var userId = req.params.id;    
     var userData = req.body;
-    
-    User.update({id: userId}, userData, function(err){
-        if (err) {
-            res.status(500);
-        } else {
-            res.status(200).json('succeed in udpate user:' + userData);
-        }
-    });    
+
+    updateUserPromise(userId, userData)
+        .then(function(){
+            res.status(200).json('succeed in udpate user');            
+        })
+        .catch(function(err){
+            res.status(500).json(err);                        
+        });    
 });
 
 
-
-// DELETE
+/**
+ * ユーザを削除する
+ * @param {String} id
+ */
 router.delete('/users/:id', function(req, res, next) {
     var userId = req.params.id;
-    User.remove({id: userId}, function(err) {
-        if (err) {
-            res.status(500).json(err);                       
-        } else {
-            res.status(200).json('succeed in delete user:' + userId);
-        }
-    });
+    
+    deleteUserPromise(userId)
+        .then(function(){
+            res.status(200).json('succeed in delete user');            
+        })
+        .catch(function(err){
+            res.status(500).json(err);                        
+        });        
 });
 
 
-
-// Others
-/* 学生からランダムに一人取り出す */
+/**
+ * 学生からランダムに一人取り出す
+ * @return {Object} user ユーザ情報 ex: {last_name:Takatori, first_name:Satoshi, nick_name: tori}
+ */
 router.get('/users/students/random', function (req, res, next) {
 
-    var filter = { group: { $in : config.student }};
-    var fields = { last_name:1, first_name:1, nick_name:1 };
-    User.findOneRandom(filter, fields, function(err, user) {
-        if (err) {
-            res.status(500);
-        } else {
-            res.status(200).json(user);
-        }        
-    });
+    var query = { group: { $in : config.student }};
+    var filter = { last_name:1, first_name:1, nick_name:1 };
+
+    fetchUserRandomPromise(query, filter)
+        .then(function(user){
+            res.status(200).json(user);            
+        })
+        .catch(function(err){
+            res.status(500);            
+        });
 });
 
-/* 卒業 */
-router.get('/graduate/:id', function (req, res, next) {
-    var userId = req.params.id;
 
+/**
+ * ユーザの所属グループを卒業生に変更する
+ * @param {String} id
+ */
+router.get('/users/:id/graduate', function (req, res, next) {
+
+    var userId = req.params.id;
     var graduationYear = (new Date).getFullYear() + 'Graduates';
     var userData = { group: graduationYear };
-    
-    User.update({id: userId}, userData, function(err){
-        if (err) {
-            res.status(500);
-        } else {
-            res.status(200).json('succeed in udpate user:' + userData);
-        }
-    });        
+
+    updateUserPromise(userId, userData)
+        .then(function(){
+            res.status(200).send('succeed in udpate user:' + userData);            
+        })
+        .catch(function(err) {
+            res.status(500).send(err);            
+        });
 });
 
-/* 進級 */
-router.get('/promotion/:id', function (req, res, next) {
+
+/**
+ * ユーザの所属グループを現在の学年から一つ上げる
+ * @param {String} id
+ */
+router.get('/users/:id/promotion', function (req, res, next) {
+
     var userId = req.params.id;
-    User.findOne({id: userId}, function(err, user){
-        if (err) {
-            res.status(500);
-        } else {
-            if (!user) res.status(500).send('Cannot find User:' + userId);
-
-            var grade = { group: promotion(user.group)};
-            User.update({id: userId}, grade, function (err){
-                if (err) {
-                    res.status(500);
-                } else {
-                    res.status(200).json('succeed in udpate user:' + userId);                    
-                }
-            });
-
-        }
-    });        
+    var query = {id: userId};
+    
+    fetchUserPromise(query,{})
+        .then(function(user){
+            if (!user) throw new Error('cannot find user');
+            
+            var updateData = { group: promotion(user.group)};
+            return updateUserPromise(userId, updateData);
+        })
+        .then(function(){
+            res.status(200).send('succeed in udpate user:' + userId);
+        })
+        .catch(function(err){
+            res.status(500).send(err);
+        });
 });
 
 // 進級処理
 function promotion (grade) {
+
     switch(grade){
     case 'B4':
         grade = 'M1';
@@ -186,54 +216,91 @@ function promotion (grade) {
     return grade;
 }
 
-//===================== CONFIG ==========================
+/**
+ * ユーザの設定情報一覧を取得する
+ * @param {String} id
+ * @return {Object} configs 
+ */
+router.get('/users/:id/configs', function (req, res, next) {
 
-// GET
-/* ALL */
-router.get('/users/:userId/configs', function (req, res, next) {
-    User.findOne({id: req.params.userId}, {configs: true}, function(err, data) {
-        if (err) {
-            res.status(500).json(err);            
-        } else {
-            res.status(200).json(data);            
-        }
-    });
+    var query = {id: req.params.id};
+    var filter = {configs: true};
     
+    fetchUserPromise(query, filter)
+        .then(function(configs){
+            res.status(200).json(configs);                        
+        })
+        .catch(function(err) {
+            res.status(500).send(err);                        
+        });
 });
 
-/* タグ検索 */
-router.post('/users/:userId/configs/search', function (req, res, next) {
 
-    var userId  = req.params.userId;
-    var queries = req.body.tags;    
-    var value   = [];
+/**
+ * ユーザの設定情報をタグで検索する
+ * @param {String} id 
+ * @param {[String]} tags ex:['test', 'test2']
+ * @return {Object} configs
+ */
+router.post('/users/:id/configs/search', function (req, res, next) {
 
-    User.findOne({id: req.params.userId}, {configs: true}, function(err, user) {
-        if (err || !user) {
-            res.status(500).json(err); 
-        } else {
-            for (var i = 0; i < user.configs.length; i++) {
-                if (isContainAllQueries(user.configs[i].tags, queries)) {
-                    value.push(user.configs[i].value);                    
-                }
+    var query  = {id: req.params.id};
+    var tags = req.body.tags;    
+
+    fetchUserPromise(query, {})
+        .then(function(user){
+            if (!user) {
+                throw new Error('cannot find user');                
+            } else {
+                res.status(200).json(searchConfigs(user, tags));
             }
-            res.status(200).json(value);            
-        }
-    });
+        })
+        .catch(function(err){
+            res.status(500).send(err);            
+        });
 });
 
-// tagの中にqueriesの要素がすべてあればtrue,なければfalseを返す
+/**
+ * ユーザの設定情報を検索する
+ * @param {Object} user
+ * @param {Object} queryies ex: {}
+ * @return {[String]} value
+ */
+function searchConfigs(user, queries) {
+    var value = [];
+    console.log(queries);
+    for (var i = 0; i < user.configs.length; i++) {
+        if (isContainAllQueries(user.configs[i].tags, queries)) {
+            value.push(user.configs[i].value);                   
+        }
+    }
+    return value;
+}
+
+/**
+ * 指定されたtagの中にqueriesの要素がすべてあればtrue,なければfalseを返す
+ * @param {Object} tags 
+ * @param {Object} queries
+ * @return boolean 
+ */
 function isContainAllQueries (tags, queries) {
-    for (i = 0; i < queries.length; i++) {
+    for (var i = 0; i < queries.length; i++) {
         if (tags.indexOf(queries[i].toString()) < 0) return false;
     }
     return true;
 }
 
-// CREATE
-router.post('/users/:userId/configs', function (req, res, next) {
+
+
+
+/**
+ * ユーザの設定情報を新規登録する 
+ * @param {String} id
+ * @param {Object} config
+ */
+router.post('/users/:id/configs', function (req, res, next) {
     console.log(req.body);
-    var userId = req.params.userId;
+    var userId = req.params.id;
     var config = req.body;
     
     User.findOne({id: userId}, function(err, user) {
@@ -253,12 +320,17 @@ router.post('/users/:userId/configs', function (req, res, next) {
 });
 
 
-// UPDATE
-/* add tag */
-router.post('/users/:userId/configs/:configId/tags', function (req, res, next) {
+/**
+ * ユーザの設定情報を更新する
+ * 設定情報のタグを追加する
+ * @param {String} id
+ * @param {String} configId 
+ * @param {String} tag
+ */
+router.post('/users/:id/configs/:configId/tags', function (req, res, next) {
 
     console.log(req.body);
-    var userId = req.params.userId;
+    var userId = req.params.id;
     var configId = req.params.configId;
     var config = req.body;
 
@@ -282,11 +354,17 @@ router.post('/users/:userId/configs/:configId/tags', function (req, res, next) {
     });      
 });
 
-/* change value */
-router.post('/users/:userId/configs/:configId/value', function (req, res, next) {
+/**
+ * ユーザの設定情報を更新する
+ * 設定情報のvalueを変更する
+ * @param {String} id
+ * @param {String} configId 
+ * @param {String} value
+ */
+router.post('/users/:id/configs/:configId/value', function (req, res, next) {
 
     console.log(req.body);
-    var userId = req.params.userId;
+    var userId = req.params.id;
     var configId = req.params.configId;
     var config = req.body;
 
@@ -311,11 +389,14 @@ router.post('/users/:userId/configs/:configId/value', function (req, res, next) 
 });  
 
 
-// DELETE
-/* config delete */
-router.delete('/users/:userId/configs/:configId', function (req, res, next) {
+/**
+ * ユーザの設定情報を削除する
+ * @param {String} id
+ * @param {String} configId 
+ */
+router.delete('/users/:id/configs/:configId', function (req, res, next) {
 
-    var userId = req.params.userId;
+    var userId = req.params.id;
     var configId = req.params.configId;
     
     User.findOne({id: userId}, function(err, user) {
@@ -339,10 +420,16 @@ router.delete('/users/:userId/configs/:configId', function (req, res, next) {
     
 });
 
-/* tag delete */
-router.delete('/users/:userId/configs/:configId/tags/:tagName', function (req, res, next) {
+/**
+ * ユーザの設定情報を更新する
+ * 設定情報のtagを削除する
+ * @param {String} id
+ * @param {String} configId 
+ * @param {String} tagName
+ */
+router.delete('/users/:id/configs/:configId/tags/:tagName', function (req, res, next) {
 
-    var userId = req.params.userId;
+    var userId = req.params.id;
     var configId = req.params.configId;
     var tagName = req.params.tagName;
 
@@ -369,6 +456,101 @@ router.delete('/users/:userId/configs/:configId/tags/:tagName', function (req, r
     });
 });
 
+
+function fetchUserPromise(query, filter) {
+    return new Promise(function (resolve, reject) {
+        User.findOne(query, filter, function(err, user) {
+            if (err){
+                reject(new Error(err));
+            } else {
+                resolve(user);
+            }
+        });
+    });
+}
+
+function fetchUserListPromise(query, filter) {
+    return new Promise(function (resolve, reject) {
+        User.find(query, filter, function(err, users) {
+            if (err){
+                reject(new Error(err));
+            } else {
+                resolve(users);
+            }
+        });
+    });
+}
+
+function fetchUserRandomPromise(query, filter) {
+    return new Promise(function (resolve, reject) {
+        User.findOneRandom(query, filter, function(err, user) {
+            if (err){
+                reject(new Error(err));
+            } else {
+                resolve(user);
+            }
+        });
+    });    
+}
+
+function createUserPromise(userData) {
+    return new Promise(function (resolve, reject) {
+        User.create(userData, function(err) {
+            if (err) {
+                reject(new Error(err));
+            } else {
+                resolve();
+            }
+        });
+    });
+}
+
+function updateUserPromise(userId, userData) {
+    return new Promise(function (resolve, reject) {
+        User.update({id: userId}, userData, function(err){
+            if (err) {
+                reject(new Error(err));
+            } else {
+                resolve();
+            }            
+        });
+    });
+}
+
+function deleteUserPromise(userId) {
+    return new Promise(function (resolve, reject) {
+        User.remove({id: userId}, function(err){
+            if (err) {
+                reject(new Error(err));
+            } else {
+                resolve();
+            }            
+        });
+    });
+}
+
+
+
+/**
+ * UserManagerを購読しているAPIを取得する
+ */
+function fetchSubscriber() {
+    return new Promise(function (resolve, reject) {
+        
+    });
+}
+
+function publishPromise(url) {
+    return new Promise(function (resolve, reject) {
+       request.get(url, function(err, response, body) {
+           if (!err && response.statusCode == 200) {
+               resolve();
+           } else {
+               reject(new Error(err));
+           }
+       });
+    });
+}
 
 
 // Forbidden

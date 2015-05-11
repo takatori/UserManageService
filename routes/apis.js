@@ -416,8 +416,7 @@ router.delete('/users/:id/configs/:configId', function (req, res, next) {
                 }            
             });            
         }
-    });
-    
+    });    
 });
 
 /**

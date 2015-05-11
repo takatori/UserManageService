@@ -43,10 +43,21 @@ npm run forever-list
 npm run foreve-stop $pid
 ```
 
-## API Document
-* 学生からランダムで一人取得
-  * /apis/users/students/random
+## APIs
+### [GET] /apis/users
+ * 全ユーザの情報を返す
+ * @return{[User]}
 
+### [GET] /apis/users/current
+ * 現役のユーザーの情報で指定した属性のみを返す
+ * @param {String} filter 属性情報 ex: filter=first_name,last_name
+ * @return {[User]}
+
+### [GET] /apis/users
+
+
+
+### apiary.io
 * [apiary.io](http://docs.usermanageservice.apiary.io)
 
 

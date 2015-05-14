@@ -14,7 +14,7 @@ var UserSchema = new mongoose.Schema({
     first_name: { type: String, required: true },   // 名
     last_name:  { type: String, required: true },   // 姓
     nick_name:  { type: String, required: true},    // 愛称・ニックネーム
-    sex:        { type: String}, // 性別 [male, female]
+    sex:        { type: String, enum:['male', 'female']}, // 性別 [male, female]
     birthday:   { type: String}, // 生年月日
     group:      { type: String}, // 学年 [B3, B4, M1, M2, Stuff, 20xxGraduates, ...]
     tel:        { type: String}, // 電話番号
@@ -27,6 +27,22 @@ var UserSchema = new mongoose.Schema({
 });
 UserSchema.plugin(uniqueValidator, {message: '既に登録されているユーザです'});
 UserSchema.plugin(random);
+
+/**
+ * ユーザIDのバリデーション
+ * idは3文字以上15文字以下の半角英数のみ許可する
+ */
+UserSchema.schema.path('id').validate(function(value){
+    return /^[a-zA-Z0-9]{3, 15}$/.test(value);
+}, 'Invalid id');
+
+/**
+ * パスワードのバリデーション
+ * passwordは3文字以上15文字以下の半角英数のみ許可する
+ */
+UserSchema.schema.path('passowrd').validate(function(value){
+    return /^[a-zA-Z0-9]{3, 15}$/.test(value);
+}, 'Invalid id');
 
 module.exports.User = mongoose.model('User', UserSchema);
 

@@ -32,17 +32,21 @@ UserSchema.plugin(random);
  * ユーザIDのバリデーション
  * idは3文字以上15文字以下の半角英数のみ許可する
  */
-UserSchema.schema.path('id').validate(function(value){
+UserSchema.path('id').validate(function(value){
     return /^[a-zA-Z0-9]{3, 15}$/.test(value);
 }, 'Invalid id');
 
 /**
  * パスワードのバリデーション
- * passwordは3文字以上15文字以下の半角英数のみ許可する
+ * passwordは3文字以上15文字のみ許可する
  */
-UserSchema.schema.path('passowrd').validate(function(value){
+UserSchema.path('passowrd').validate(function(value){
     return /^[a-zA-Z0-9]{3, 15}$/.test(value);
-}, 'Invalid id');
+}, 'Invalid password');
+
+
+
+
 
 module.exports.User = mongoose.model('User', UserSchema);
 

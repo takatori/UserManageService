@@ -11,12 +11,8 @@ process.env.NODE_ENV = 'test';
 // 各テストごとの始まる前の処理
 beforeEach(function (done) {
 
-    function clearDB() {
-        for (var i in mongoose.connection.collections) {
-            mongoose.connection.collections[i].remove(function() {});
-        }
-        return done();
-    }
+    // DB初期化
+    clearDB(done);
     
     // mongoose.connection.readyState
     // 0 = disconnected
@@ -43,4 +39,12 @@ afterEach(function (done) {
     return done();
 });
 
+
+
+function clearDB(done) {
+    for (var i in mongoose.connection.collections) {
+        mongoose.connection.collections[i].remove(function() {});
+    }
+    return done();    
+}
 

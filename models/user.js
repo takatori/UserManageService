@@ -11,8 +11,8 @@ var UserSchema = new mongoose.Schema({
     id :        { type: String, default: '', required: true, unique: true},    // id 登録ID
     password:   { type: String, required: true}, // パスワード
     stu_id :    { type: String},                   // stu_id 学籍番号
-    first_name: { type: String, required: true },   // 名
-    last_name:  { type: String, required: true },   // 姓
+    first_name: { type: String, required: true},   // 名
+    last_name:  { type: String, required: true},   // 姓
     nick_name:  { type: String, required: true},    // 愛称・ニックネーム
     sex:        { type: String, enum:['male', 'female']}, // 性別 [male, female]
     birthday:   { type: String}, // 生年月日
@@ -38,12 +38,11 @@ UserSchema.path('id').validate(function(value){
 
 /**
  * パスワードのバリデーション
- * passwordは3文字以上15文字のみ許可する
+ * passwordは8文字以上15文字のみ許可する
  */
-UserSchema.path('passowrd').validate(function(value){
-    return /^[a-zA-Z0-9]{3, 15}$/.test(value);
+UserSchema.path('password').validate(function(value){
+    return /^[a-zA-Z0-9!@#$%_¥+]{3, 15}$/.test(value);
 }, 'Invalid password');
-
 
 
 

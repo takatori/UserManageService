@@ -7,6 +7,7 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/user').User;
 var config = require('../config');
+var request = require('request');
 var fs = require('fs');
 
 

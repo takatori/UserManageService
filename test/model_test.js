@@ -5,23 +5,13 @@ var utils = require('./utils');
 var should = require('should');
 var request = require('request');
 var fs = require('fs');
-var csv = require('csv')
-;
+var csv = require('csv');
+
 // import our User mongoose model
 var User = require('../models/user').User;
 
 describe('User: models', function () {
 
-    var testUsers;
-    console.log('*** input stream test start ***');
-    var input = fs.createReadStream(__dirname + '/user.csv'); //'./user.csv'だとエラー./がプロジェクトルートになる
-    input.pipe(csv.parse({comment: '#'}, function(err, output){
-        console.log(output);
-        testUsers = output;
-    }));
-    console.log('*** input stream test end ***');
-    console.log(testUsers);
-    
     describe('#create()', function (done) {
         it('should create a new User', function (done) {
             // Create a User object to pass to User.create()

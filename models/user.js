@@ -33,15 +33,15 @@ UserSchema.plugin(random);
  * idは3文字以上15文字以下の半角英数のみ許可する
  */
 UserSchema.path('id').validate(function(value){
-    return /^[a-zA-Z0-9]{3, 15}$/.test(value);
+    return /^[a-zA-Z0-9]{3,15}$/.test(value);
 }, 'Invalid id');
 
 /**
  * パスワードのバリデーション
- * passwordは8文字以上15文字のみ許可する
+ * passwordは3文字以上15文字のみ許可する
  */
 UserSchema.path('password').validate(function(value){
-    return /^[a-zA-Z0-9!@#$%_¥+]{3, 15}$/.test(value);
+    return /^[a-zA-Z0-9!@#$%_]{3,15}$/.test(value);
 }, 'Invalid password');
 
 

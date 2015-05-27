@@ -8,7 +8,7 @@
     "forever-start": "node_modules/.bin/forever start app.js",
     "forever-list": "node_modules/.bin/forever list",
     "forever-stop": "node_modules/.bin/forever stop",
-    "test": "node_modules/.bin/mocha --reporter spec"
+    "test": "node_modules/.bin/mocha --reporter spec --compilers js:babel/register"
   },
   "engines": {
     "node": "v0.10.25",
@@ -37,5 +37,8 @@
     "should": "~4.6.1",
     "socket.io": "~1.2.1",
     "stylus": "0.42.3"
+  },
+  "devDependencies": {
+    "babel": "^5.4.7"
   }
 }

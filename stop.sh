@@ -1,4 +1,5 @@
 #!/bin/sh
-l=$(npm run forever-list | grep usermanage)
-uid=$(echo $l | cut -d " " -f 3)
-npm run forever-stop $uid
+DIR=$(cd $(dirname $0) && pwd) # 現在のディレクトリ
+stop="${DIR}/node_modules/.bin/forever stop usermanage"
+eval $stop
+

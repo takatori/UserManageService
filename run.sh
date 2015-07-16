@@ -1,5 +1,5 @@
 #!/bin/sh
-DIR=$(cd $(dirname $0) && pwd)
+DIR=$(cd $(dirname $0) && pwd) # 現在のディレクトリ
 mode="dev"
 env="dev"
 start_prod="${DIR}/node_modules/.bin/forever start --uid 'usermanage' -a ${DIR}/app.js"

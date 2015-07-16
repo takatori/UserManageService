@@ -1,9 +1,9 @@
 #!/bin/sh
 mode="dev"
 env="dev"
-start_prod="node_modules/.bin/forever start --uid 'usermanage' -a app.js"
-start_dev="node_modules/.bin/nodemon app.js"
-start_test="node_modules/.bin/mocha --reporter spec"
+start_prod="./node_modules/.bin/forever start --uid 'usermanage' -a app.js"
+start_dev="./node_modules/.bin/nodemon app.js"
+start_test="./node_modules/.bin/mocha --reporter spec"
 
 while getopts m:e: OPT
 do

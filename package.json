@@ -2,45 +2,36 @@
   "name": "UserManageService",
   "version": "0.0.1",
   "private": true,
-  "scripts": {
-    "start": "node app.js",
-    "nodemon-start": "nodemon app.js",
-    "forever-start": "node_modules/.bin/forever start app.js",
-    "forever-list": "node_modules/.bin/forever list",
-    "forever-stop": "node_modules/.bin/forever stop",
-    "test": "node_modules/.bin/mocha --reporter spec --compilers js:babel/register"
-  },
   "engines": {
-    "node": "v0.10.25",
-    "npm": "2.1.8"
+    "node": "v0.12.7",
+    "npm": "2.11.3"
   },
   "dependencies": {
-    "body-parser": "~1.10.1",
+    "body-parser": "~1.14.1",
     "bootflat": "~2.0.4",
-    "chai": "^3.0.0",
-    "connect-mongo": "~0.7.0",
-    "cookie-parser": "~1.3.3",
-    "csv": "^0.4.2",
-    "debug": "~2.1.1",
+    "chai": "^3.4.1",
+    "connect-mongo": "~0.8.2",
+    "cookie-parser": "~1.4.0",
+    "csv": "^0.4.6",
+    "debug": "~2.2.0",
     "ect": "~0.5.9",
-    "express": "~4.11.0",
-    "express-session": "~1.10.1",
-    "forever": "^0.14.1",
-    "mocha": "~2.1.0",
-    "mongoose": "~3.8.21",
-    "mongoose-simple-random": "^0.3.0",
-    "mongoose-unique-validator": "~0.4.1",
-    "morgan": "~1.5.1",
-    "newrelic": "~1.15.1",
-    "nodemon": "^1.3.7",
-    "request": "^2.55.0",
-    "serve-favicon": "~2.2.0",
-    "should": "^6.0.3",
-    "socket.io": "~1.2.1",
-    "stylus": "0.42.3",
-    "supertest": "^1.0.1"
+    "express": "~4.13.3",
+    "express-session": "~1.12.1",
+    "mocha": "~2.3.4",
+    "mongoose": "~4.2.7",
+    "mongoose-simple-random": "^0.3.3",
+    "mongoose-unique-validator": "~0.6.1",
+    "morgan": "~1.6.1",
+    "newrelic": "~1.24.0",
+    "nodemon": "^1.8.1",
+    "request": "^2.67.0",
+    "serve-favicon": "~2.3.0",
+    "should": "^7.1.1",
+    "socket.io": "~1.3.7",
+    "stylus": "0.52.4",
+    "supertest": "^1.1.0"
   },
   "devDependencies": {
-    "babel": "^5.4.7"
+    "babel": "^6.1.18"
   }
 }
